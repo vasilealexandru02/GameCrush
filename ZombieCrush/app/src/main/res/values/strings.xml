@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ZombieCrush</string>
+    <!--Main activity-->
+    <string name="btnLogin">Iniciar sesión</string>
+    <string name="btnRegistro">Registrarme</string>
+    <!--Actividad registro-->
+    <string name="emailUsuario">Email</string>
+    <string name="passwordUsuario">Introduce una contraseña</string>
+    <string name="nombreUsuario">Introduce tu nombre</string>
+    <string name="fechaRegistro">Fecha</string>
+    <string name="textoBotonRegistro">Registrarme</string>
+
 </resources>
