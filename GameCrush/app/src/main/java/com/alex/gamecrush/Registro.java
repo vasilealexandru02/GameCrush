@@ -1,4 +1,4 @@
-package com.alex.zombiecrush;
+package com.alex.gamecrush;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -120,7 +121,7 @@ public class Registro extends AppCompatActivity {
                 //reference.push().setValue(datosUsuario);
 
 
-                DatabaseReference database = FirebaseDatabase.getInstance().getReference("Prueba"       );
+                DatabaseReference database = FirebaseDatabase.getInstance().getReference("Prueba");
 
 
                 database.setValue("Hello, World!");
