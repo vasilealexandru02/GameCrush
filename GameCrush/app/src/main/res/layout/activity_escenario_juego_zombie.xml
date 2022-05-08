@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".EscenarioJuegoZombie">
+
+
+    <!--Informacion partida-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription="arma"
+                android:src="@drawable/pistola" />
+
+            <TextView
+                android:id="@+id/contadorZombies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/contadorZombies"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/nombreJugador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="@string/nombreJugador" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="tiempo.json"
+                app:lottie_imageAssetsFolder="assets"
+                app:lottie_loop="true" />
+
+            <TextView
+                android:id="@+id/tiempoJugado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/tiempoJugado"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageViewZombie"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/zombie" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>

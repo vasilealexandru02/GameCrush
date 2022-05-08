@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCrush">
         <activity
+            android:name=".EscenarioJuegoZombie"
+            android:exported="true" />
+        <activity
             android:name=".PrimeraVista"
             android:exported="true">
             <intent-filter>
@@ -22,12 +25,11 @@
             android:name=".Registro"
             android:exported="true" />
         <activity
-            android:name=".MenuJuego"
+            android:name=".MenuPrincipal"
             android:exported="true" />
         <activity
             android:name=".Login"
             android:exported="true" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

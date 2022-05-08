@@ -14,7 +14,7 @@ public class PrimeraVista extends AppCompatActivity {
         setContentView(R.layout.activity_primera_vista);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(PrimeraVista.this, MenuJuego.class);
+            Intent intent = new Intent(PrimeraVista.this, MenuPrincipal.class);
             startActivity(intent);
         }, 1500);
     }

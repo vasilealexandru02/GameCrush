@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class MenuJuego extends AppCompatActivity {
+public class MenuPrincipal extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     Button btnCerrarSesion;
@@ -63,6 +63,17 @@ public class MenuJuego extends AppCompatActivity {
         btnJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MenuPrincipal.this, EscenarioJuegoZombie.class);
+                String uidString = textViewUid.getText().toString();
+                String nombreString = textViewNombreUsuarioMenu.getText().toString();
+                String cantidadZombies = textViewcantidadZombies.getText().toString();
+
+                intent.putExtra("uid",uidString);
+                intent.putExtra("nombre",nombreString);
+                intent.putExtra("cantidadzombies",cantidadZombies);
+
+                startActivity(intent);
+
 
             }
         });
@@ -102,7 +113,7 @@ public class MenuJuego extends AppCompatActivity {
             Toast.makeText(this, "Jugador en linea", Toast.LENGTH_SHORT).show();
             consultarDatosJugador();
         } else {
-            startActivity(new Intent(MenuJuego.this, MainActivity.class));
+            startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
             finish();
         }
     }
@@ -110,9 +121,10 @@ public class MenuJuego extends AppCompatActivity {
     private void cerrarSesion() {
         auth.signOut();
         Toast.makeText(this, "¡Has cerrado sesión!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(MenuJuego.this, MainActivity.class));
+        startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
 
     }
+
     // HACE UNA QUERY CON TODOS LOS DATOS DEL USUARIO FILTRADO POR EL CORREO DEL USUARIO ACTUAL Y ASIGNA LOS VALORES A LOS TEXT VIEW
     private void consultarDatosJugador() {
         Query query = baseDeDatos.orderByChild("Email").equalTo(user.getEmail());

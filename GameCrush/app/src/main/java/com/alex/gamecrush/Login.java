@@ -3,11 +3,9 @@ package com.alex.gamecrush;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +59,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = auth.getCurrentUser();
-                    startActivity(new Intent(Login.this, MenuJuego.class));
+                    startActivity(new Intent(Login.this, MenuPrincipal.class));
                     assert user != null;
                     Toast.makeText(Login.this, "Bienvenido a GameCrush!", Toast.LENGTH_SHORT).show();
                     finish();

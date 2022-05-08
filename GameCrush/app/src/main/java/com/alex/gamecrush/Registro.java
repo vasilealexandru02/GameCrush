@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.Menu;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -72,11 +69,11 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-
                     // Una vez registrado el usuario, se cambia de actividad a la del menu
                     //startActivity(new Intent(Registro.this, MenuJuego.class));
                     Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Registro.this, Menu.class));
+                    insertarDatosJugador();
+                    startActivity(new Intent(Registro.this, MenuPrincipal.class));
                     finish();
 
 
@@ -96,23 +93,23 @@ public class Registro extends AppCompatActivity {
     }
 
     private void insertarDatosJugador() {
-        FirebaseUser usuario = auth.getCurrentUser();
         int cantidadZombiesEliminados = 0;
-        assert usuario != null;
-        String uidString = usuario.getUid();
+        String uidString = auth.getCurrentUser().getUid();
         String emailString = emailUsuario.getText().toString();
         String passwordString = passwordUsuario.getText().toString();
-        String nombreString = nombreUsuario.getText().toString();
+        String nombreUsuarioString = nombreUsuario.getText().toString();
         String fechaString = fechaRegistro.getText().toString();
 
         HashMap<Object, Object> datosUsuario = new HashMap<>();
         datosUsuario.put("Uid", uidString); // uid del usuario
         datosUsuario.put("Email", emailString); // email del usuario
         datosUsuario.put("Password", passwordString);   // password del usuario
-        datosUsuario.put("Nombre", nombreString);     // nombre del usuario
+        datosUsuario.put("Nombre", nombreUsuarioString);     // nombre del usuario
         datosUsuario.put("Zombies", cantidadZombiesEliminados); // cantidad de zombies eliminados por el usuario
         datosUsuario.put("Fecha", fechaString);      // fecha de registro del usuario
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("DATOS USUARIOS");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("BASE DE DATOS");
         reference.push().setValue(datosUsuario);
     }
 }

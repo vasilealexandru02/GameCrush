@@ -32,4 +32,9 @@
     <string name="btnPuntuaciones">Ver puntuaciones</string>
     <string name="btnAcercaDe">Acerca de</string>
 
+    <!--Juego zombies-->
+    <string name="contadorZombies">0</string>
+    <string name="nombreJugador"> --- </string>
+    <string name="tiempoJugado">0</string>
+
 </resources>
