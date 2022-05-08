@@ -1,13 +1,35 @@
 <resources>
-    <string name="app_name">ZombieCrush</string>
+    <string name="app_name">GameCrush</string>
+
     <!--Main activity-->
+
     <string name="btnLogin">Iniciar sesión</string>
     <string name="btnRegistro">Registrarme</string>
+
     <!--Actividad registro-->
+
     <string name="emailUsuario">Email</string>
     <string name="passwordUsuario">Introduce una contraseña</string>
     <string name="nombreUsuario">Introduce tu nombre</string>
     <string name="fechaRegistro">Fecha</string>
     <string name="textoBotonRegistro">Registrarme</string>
+
+    <!--Actividad login-->
+    <string name="emailLogin">Correo electrónico</string>
+    <string name="passwordLogin">Contraseña</string>
+    <string name="botonLogin">Iniciar sesión</string>
+
+
+    <!--Menu-->
+    <string name="puntuacion">Puntuación</string>
+    <string name="cantidadZombies"> --</string>
+    <string name="uid"> -- </string>
+    <string name="textoMenu">Menú</string>
+    <string name="nombreUsuarioMenu"> -- </string>
+    <!-- Botones-->
+    <string name="btnCerrarSesion">Cerrar sesión</string>
+    <string name="btnJugar">Jugar</string>
+    <string name="btnPuntuaciones">Ver puntuaciones</string>
+    <string name="btnAcercaDe">Acerca de</string>
 
 </resources>

@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundLightBlue"
     tools:context=".MenuJuego">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/puntuacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/puntuacion"
+            android:textSize="30sp" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/imagenMenu"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/zombie_menu">
+
+        </pl.droidsonroids.gif.GifImageView>
+
+        <TextView
+            android:id="@+id/cantidadZombies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/cantidadZombies" />
+
+        <TextView
+            android:id="@+id/nombreUsuarioMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/cantidadZombies" />
+
+        <TextView
+            android:id="@+id/uid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/uid" />
+
+        <TextView
+            android:id="@+id/textoMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/textoMenu"
+            android:textSize="24sp" />
+
+        <!--Botones-->
+
+
+        <Button
+            android:id="@+id/btnJugar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/darkblueZC"
+            android:padding="15dp"
+            android:text="@string/btnJugar" />
+
+        <Button
+            android:id="@+id/btnPuntuaciones"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/darkblueZC"
+            android:padding="15dp"
+            android:text="@string/btnPuntuaciones" />
+
+        <Button
+            android:id="@+id/btnAcercaDe"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/darkblueZC"
+            android:padding="15dp"
+            android:text="@string/btnAcercaDe" />
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/cerrarSesion"
+            android:padding="15dp"
+            android:text="@string/btnCerrarSesion" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

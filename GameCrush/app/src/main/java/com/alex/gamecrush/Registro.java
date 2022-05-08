@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -34,7 +34,6 @@ public class Registro extends AppCompatActivity {
     EditText passwordUsuario;
     TextView fechaRegistro;
     Button registrarUsuario;
-    Button darDeAlta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +73,11 @@ public class Registro extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-
                     // Una vez registrado el usuario, se cambia de actividad a la del menu
                     //startActivity(new Intent(Registro.this, MenuJuego.class));
                     Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Registro.this, Menu.class));
+                    finish();
 
 
                 } else {
@@ -95,7 +95,7 @@ public class Registro extends AppCompatActivity {
 
     }
 
-    private void insertarDatos() {
+    private void insertarDatosJugador() {
         FirebaseUser usuario = auth.getCurrentUser();
         int cantidadZombiesEliminados = 0;
         assert usuario != null;
@@ -112,21 +112,7 @@ public class Registro extends AppCompatActivity {
         datosUsuario.put("Nombre", nombreString);     // nombre del usuario
         datosUsuario.put("Zombies", cantidadZombiesEliminados); // cantidad de zombies eliminados por el usuario
         datosUsuario.put("Fecha", fechaString);      // fecha de registro del usuario
-
-        darDeAlta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //FirebaseDatabase database = FirebaseDatabase.getInstance();
-                //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("BASE DE DATOS");
-                //reference.push().setValue(datosUsuario);
-
-
-                DatabaseReference database = FirebaseDatabase.getInstance().getReference("Prueba");
-
-
-                database.setValue("Hello, World!");
-
-            }
-        });
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("DATOS USUARIOS");
+        reference.push().setValue(datosUsuario);
     }
 }

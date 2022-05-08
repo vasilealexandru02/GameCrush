@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkblueZC"
-    tools:context=".Registro"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context=".Registro">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -15,38 +15,49 @@
         android:gravity="center"
         android:orientation="vertical">
         <!--Nombre de usuario del jugador-->
-        <EditText
-            android:id="@+id/nombreUsuario"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/nombreUsuario"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/nombreUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/nombreUsuario"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <!--Email del jugador-->
-        <EditText
-            android:id="@+id/emailUsuario"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/emailUsuario"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/emailUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/emailUsuario"
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
         <!--Contraseña del jugador-->
-        <EditText
-            android:id="@+id/passwordUsuario"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/passwordUsuario"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/passwordUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/passwordUsuario"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--Fecha en la que se realiza el registro del jugador-->
         <TextView
@@ -56,10 +67,10 @@
             android:layout_marginBottom="10dp"
             android:padding="10dp"
             android:text="@string/fechaRegistro"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:textAlignment="center"/>
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/registrarUsuario"
