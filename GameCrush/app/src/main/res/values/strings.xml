@@ -35,6 +35,13 @@
     <!--Juego zombies-->
     <string name="contadorZombies">0</string>
     <string name="nombreJugador"> --- </string>
-    <string name="tiempoJugado">0</string>
+    <string name="tiempoRestante">0</string>
+
+    <!--PARTIDA PERDIDA JUEGO ZOMBIES-->
+    <string name="textoPartidaPerdidaZombies">¡Has perdido!</string>
+    <string name="textoJuegoZombies">Has asesinado </string>
+    <string name="volverAJugar">Reintentar</string>
+    <string name="verPuntuaciones">Puntuaciones</string>
+    <string name="volverMenuPrincipal">Menu principal</string>
 
 </resources>

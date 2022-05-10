@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="700dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textoPartidaPerdidaZombies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/textoPartidaPerdidaZombies" />
+
+    <TextView
+        android:id="@+id/textoJuegoZombies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/textoJuegoZombies" />
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imagenMenu"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/parca" />
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:id="@+id/volverAJugar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volverAJugar" />
+
+    <Button
+        android:id="@+id/verPuntuaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/verPuntuaciones" />
+
+    <Button
+        android:id="@+id/volverMenuPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volverMenuPrincipal" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

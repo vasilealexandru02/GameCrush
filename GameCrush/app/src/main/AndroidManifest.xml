@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCrush">
         <activity
-            android:name=".EscenarioJuegoZombie"
+            android:name=".juegozombie.EscenarioJuegoZombie"
             android:exported="true" />
         <activity
             android:name=".PrimeraVista"
@@ -25,7 +25,7 @@
             android:name=".Registro"
             android:exported="true" />
         <activity
-            android:name=".MenuPrincipal"
+            android:name=".juegozombie.MenuPrincipalJuegoZombie"
             android:exported="true" />
         <activity
             android:name=".Login"

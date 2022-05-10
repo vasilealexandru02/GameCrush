@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -59,11 +60,14 @@ public class Registro extends AppCompatActivity {
                 registrarUsuario(email, password);
             }
         });
-
-
     }
 
-    // Registrar usuario
+    /**
+     * Metodo que registra un usuario
+     *
+     * @param email
+     * @param password
+     */
     private void registrarUsuario(String email, String password) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -73,7 +77,7 @@ public class Registro extends AppCompatActivity {
                     //startActivity(new Intent(Registro.this, MenuJuego.class));
                     Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
                     insertarDatosJugador();
-                    startActivity(new Intent(Registro.this, MenuPrincipal.class));
+                    startActivity(new Intent(Registro.this, MenuPrincipalJuegoZombie.class));
                     finish();
 
 
@@ -92,6 +96,9 @@ public class Registro extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo que inserta los datos del jugador
+     */
     private void insertarDatosJugador() {
         int cantidadZombiesEliminados = 0;
         String uidString = auth.getCurrentUser().getUid();
@@ -99,7 +106,6 @@ public class Registro extends AppCompatActivity {
         String passwordString = passwordUsuario.getText().toString();
         String nombreUsuarioString = nombreUsuario.getText().toString();
         String fechaString = fechaRegistro.getText().toString();
-
         HashMap<Object, Object> datosUsuario = new HashMap<>();
         datosUsuario.put("Uid", uidString); // uid del usuario
         datosUsuario.put("Email", emailString); // email del usuario
@@ -109,7 +115,9 @@ public class Registro extends AppCompatActivity {
         datosUsuario.put("Fecha", fechaString);      // fecha de registro del usuario
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("BASE DE DATOS");
-        reference.push().setValue(datosUsuario);
+        DatabaseReference reference = database.getReference("BASE DE DATOS");
+        reference.child(uidString).setValue(datosUsuario);
+        //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("BASE DE DATOS");
+        //reference.push().setValue(datosUsuario);
     }
 }

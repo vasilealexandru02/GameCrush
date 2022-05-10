@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -53,13 +54,18 @@ public class Login extends AppCompatActivity {
 
     }
 
+    /**
+     * Realiza el login del jugador
+     * @param email
+     * @param password
+     */
     private void loginJugador(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = auth.getCurrentUser();
-                    startActivity(new Intent(Login.this, MenuPrincipal.class));
+                    startActivity(new Intent(Login.this, MenuPrincipalJuegoZombie.class));
                     assert user != null;
                     Toast.makeText(Login.this, "Bienvenido a GameCrush!", Toast.LENGTH_SHORT).show();
                     finish();

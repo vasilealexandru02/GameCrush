@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
+
 public class PrimeraVista extends AppCompatActivity {
 
     @Override
@@ -14,7 +16,7 @@ public class PrimeraVista extends AppCompatActivity {
         setContentView(R.layout.activity_primera_vista);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(PrimeraVista.this, MenuPrincipal.class);
+            Intent intent = new Intent(PrimeraVista.this, MenuPrincipalJuegoZombie.class);
             startActivity(intent);
         }, 1500);
     }

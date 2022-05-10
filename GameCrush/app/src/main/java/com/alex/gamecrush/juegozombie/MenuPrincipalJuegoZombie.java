@@ -1,16 +1,17 @@
-package com.alex.gamecrush;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.alex.gamecrush.juegozombie;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.alex.gamecrush.MainActivity;
+import com.alex.gamecrush.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,13 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class MenuPrincipal extends AppCompatActivity {
+public class MenuPrincipalJuegoZombie extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
+
     Button btnCerrarSesion;
     Button btnJugar;
     Button btnPuntuaciones;
     Button btnAcercaDe;
+
     TextView textViewPuntuacion;
     TextView textViewcantidadZombies;
     TextView textViewNombreUsuarioMenu;
@@ -63,18 +66,16 @@ public class MenuPrincipal extends AppCompatActivity {
         btnJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPrincipal.this, EscenarioJuegoZombie.class);
+                Intent intent = new Intent(MenuPrincipalJuegoZombie.this, EscenarioJuegoZombie.class);
                 String uidString = textViewUid.getText().toString();
                 String nombreString = textViewNombreUsuarioMenu.getText().toString();
                 String cantidadZombies = textViewcantidadZombies.getText().toString();
 
-                intent.putExtra("uid",uidString);
-                intent.putExtra("nombre",nombreString);
-                intent.putExtra("cantidadzombies",cantidadZombies);
+                intent.putExtra("uid", uidString);
+                intent.putExtra("nombre", nombreString);
+                intent.putExtra("cantidadzombies", cantidadZombies);
 
                 startActivity(intent);
-
-
             }
         });
         // BOTON DE VER PUNTUACIONES
@@ -113,19 +114,24 @@ public class MenuPrincipal extends AppCompatActivity {
             Toast.makeText(this, "Jugador en linea", Toast.LENGTH_SHORT).show();
             consultarDatosJugador();
         } else {
-            startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
+            startActivity(new Intent(MenuPrincipalJuegoZombie.this, MainActivity.class));
             finish();
         }
     }
 
+    /**
+     * Cierra la sesion del usuario
+     */
     private void cerrarSesion() {
         auth.signOut();
         Toast.makeText(this, "¡Has cerrado sesión!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(MenuPrincipal.this, MainActivity.class));
+        startActivity(new Intent(MenuPrincipalJuegoZombie.this, MainActivity.class));
 
     }
 
-    // HACE UNA QUERY CON TODOS LOS DATOS DEL USUARIO FILTRADO POR EL CORREO DEL USUARIO ACTUAL Y ASIGNA LOS VALORES A LOS TEXT VIEW
+    /**
+     * Hace una query con todos los datos del usuario filtrado por el correo del usuario y asigna los valores a los text view
+     */
     private void consultarDatosJugador() {
         Query query = baseDeDatos.orderByChild("Email").equalTo(user.getEmail());
         query.addValueEventListener(new ValueEventListener() {
