@@ -18,6 +18,7 @@ public class PrimeraVista extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(PrimeraVista.this, MenuPrincipalJuegoZombie.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);
         }, 1500);
     }
 }

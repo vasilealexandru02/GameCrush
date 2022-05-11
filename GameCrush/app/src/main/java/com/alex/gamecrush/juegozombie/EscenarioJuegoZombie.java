@@ -50,6 +50,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     FirebaseUser user;
     FirebaseDatabase database;
     DatabaseReference reference;
+    int puntuacionMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         uidString = intent.getString("uid");
         nombreString = intent.getString("nombre");
         cantidadZombiesString = intent.getString("cantidadzombies");
+        puntuacionMax = Integer.parseInt(intent.getString("puntuacionMax"));
         // ASIGNACION VALORES RECOGIDOS DEL EXTRA
         nombreTextView.setText(nombreString);
         contadorZombiesTextView.setText(cantidadZombiesString);
@@ -214,21 +216,31 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
 
         String zombies = String.valueOf(contador);
 
-        textoJuegoZombiesTextView.setText("Has matado a" + zombies + " zombies.");
+        textoJuegoZombiesTextView.setText("Has matado a " + zombies + " zombies.");
         partidaPerdidaDialog.show();
 
 
     }
 
     private void actualizarPuntuacion(String key, int cantidadZombies) {
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put(key, cantidadZombies);
-        reference.child(user.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(EscenarioJuegoZombie.this, "La puntuacion fue actualizada!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (cantidadZombies > puntuacionMax) {
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put(key, cantidadZombies);
+            reference.child(user.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(EscenarioJuegoZombie.this, "La puntuacion fue actualizada!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(EscenarioJuegoZombie.this, "Tu puntuacion ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
     }
 
 }

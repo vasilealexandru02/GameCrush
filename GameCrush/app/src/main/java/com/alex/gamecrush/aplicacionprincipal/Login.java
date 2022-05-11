@@ -1,4 +1,4 @@
-package com.alex.gamecrush;
+package com.alex.gamecrush.aplicacionprincipal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alex.gamecrush.R;
 import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,6 +57,7 @@ public class Login extends AppCompatActivity {
 
     /**
      * Realiza el login del jugador
+     *
      * @param email
      * @param password
      */
@@ -66,6 +68,7 @@ public class Login extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     FirebaseUser user = auth.getCurrentUser();
                     startActivity(new Intent(Login.this, MenuPrincipalJuegoZombie.class));
+                    // overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
                     assert user != null;
                     Toast.makeText(Login.this, "Bienvenido a GameCrush!", Toast.LENGTH_SHORT).show();
                     finish();
@@ -80,4 +83,11 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);
+    }
+
 }

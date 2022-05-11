@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkblueZC"
     android:padding="10dp"
-    tools:context=".Registro">
+    tools:context=".aplicacionprincipal.Registro">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

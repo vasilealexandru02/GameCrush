@@ -6,6 +6,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alex.gamecrush.aplicacionprincipal.Login;
+import com.alex.gamecrush.aplicacionprincipal.Registro;
+
 public class MainActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnRegistro;
@@ -20,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Login.class));
+            overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);
 
         });
 
         btnRegistro.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Registro.class));
+            overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);
         });
     }
 }

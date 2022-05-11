@@ -22,13 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registro"
+            android:name=".aplicacionprincipal.Registro"
             android:exported="true" />
         <activity
             android:name=".juegozombie.MenuPrincipalJuegoZombie"
             android:exported="true" />
         <activity
-            android:name=".Login"
+            android:name=".aplicacionprincipal.Login"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

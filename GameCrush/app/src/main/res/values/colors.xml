@@ -10,4 +10,6 @@
     <color name="backgroundLightBlue">#4E5282</color>
     <color name="darkblueZC">#40436A</color>
     <color name="cerrarSesion">#EB3434</color>
+    <color name="azulOscuro">#293241</color>
+    <color name="azulvanta">#00171f</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.alex.gamecrush;
+package com.alex.gamecrush.aplicacionprincipal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alex.gamecrush.R;
 import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -119,5 +120,11 @@ public class Registro extends AppCompatActivity {
         reference.child(uidString).setValue(datosUsuario);
         //DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("BASE DE DATOS");
         //reference.push().setValue(datosUsuario);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
     }
 }

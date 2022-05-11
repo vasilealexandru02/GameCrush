@@ -39,6 +39,8 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference baseDeDatos;
 
+    String puntuacionMax;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
                 intent.putExtra("uid", uidString);
                 intent.putExtra("nombre", nombreString);
                 intent.putExtra("cantidadzombies", cantidadZombies);
+                intent.putExtra("puntuacionMax", puntuacionMax);
 
                 startActivity(intent);
             }
@@ -126,6 +129,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
         auth.signOut();
         Toast.makeText(this, "¡Has cerrado sesión!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(MenuPrincipalJuegoZombie.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
 
     }
 
@@ -139,6 +143,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     String cantidadZombiesString = "" + ds.child("Zombies").getValue();
+                    puntuacionMax = "" + ds.child("Zombies").getValue();
                     String uidString = "" + ds.child("Uid").getValue();
                     String nombreString = "" + ds.child("Nombre").getValue();
 
@@ -154,5 +159,10 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
     }
 }
