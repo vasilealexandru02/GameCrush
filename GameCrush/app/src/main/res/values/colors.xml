@@ -7,9 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--Colores personalizados-->
     <color name="backgroundLightBlue">#4E5282</color>
     <color name="darkblueZC">#40436A</color>
     <color name="cerrarSesion">#EB3434</color>
     <color name="azulOscuro">#293241</color>
     <color name="azulvanta">#00171f</color>
+    <!--Deslizable-->
+    <color name="colorPrimary">#262938</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorwhite">#FFFFFF</color>
+    <color name="colorTransparentwhite">#cccccc</color>
+
 </resources>

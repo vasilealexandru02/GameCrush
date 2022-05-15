@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4E5282"
-    tools:context=".PrimeraVista">
+    tools:context=".aplicacionprincipal.PrimeraVista">
 
 
   <androidx.appcompat.widget.LinearLayoutCompat

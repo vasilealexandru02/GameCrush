@@ -44,4 +44,8 @@
     <string name="verPuntuaciones">Puntuaciones</string>
     <string name="volverMenuPrincipal">Menu principal</string>
 
+
+    <!--Slider-->
+    <string name="descripcionJuegoZombie">Primer juego diseño en la aplicación de GameCrush, machaca a esos zombies antes de que se acabe el tiempo!</string>
+
 </resources>

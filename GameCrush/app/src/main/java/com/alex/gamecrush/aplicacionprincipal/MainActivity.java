@@ -1,4 +1,4 @@
-package com.alex.gamecrush;
+package com.alex.gamecrush.aplicacionprincipal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.alex.gamecrush.aplicacionprincipal.Login;
-import com.alex.gamecrush.aplicacionprincipal.Registro;
+import com.alex.gamecrush.R;
 
-public class MainActivity extends AppCompatActivity {
+public class  MainActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnRegistro;
 

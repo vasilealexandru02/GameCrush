@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = auth.getCurrentUser();
-                    startActivity(new Intent(Login.this, MenuPrincipalJuegoZombie.class));
+                    startActivity(new Intent(Login.this, Slider.class));
                     // overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
                     assert user != null;
                     Toast.makeText(Login.this, "Bienvenido a GameCrush!", Toast.LENGTH_SHORT).show();

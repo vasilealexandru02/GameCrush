@@ -10,10 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCrush">
         <activity
+            android:name=".aplicacionprincipal.Slider"
+            android:exported="true" />
+        <activity
+            android:name=".aplicacionprincipal.ElegirJuego"
+            android:exported="true" />
+        <activity
             android:name=".juegozombie.EscenarioJuegoZombie"
             android:exported="true" />
         <activity
-            android:name=".PrimeraVista"
+            android:name=".aplicacionprincipal.PrimeraVista"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +37,7 @@
             android:name=".aplicacionprincipal.Login"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".aplicacionprincipal.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

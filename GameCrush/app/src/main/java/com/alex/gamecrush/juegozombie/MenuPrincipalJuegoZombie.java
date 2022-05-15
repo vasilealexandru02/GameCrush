@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.alex.gamecrush.MainActivity;
+import com.alex.gamecrush.aplicacionprincipal.MainActivity;
 import com.alex.gamecrush.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
