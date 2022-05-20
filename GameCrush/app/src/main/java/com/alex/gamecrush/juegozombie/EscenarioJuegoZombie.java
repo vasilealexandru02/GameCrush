@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -34,10 +36,11 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     String cantidadZombiesString;
 
     TextView contadorZombiesTextView;
-    TextView nombreTextView;
     TextView tiempoRestateTextView;
-
+    boolean puntuacionCambiada;
     ImageView zombieImageView;
+    ArrayList<Integer> imagenesZombies;
+    ArrayList<Integer> imagenesFondo;
 
     int contador = 0;
     int altoPantalla;
@@ -58,11 +61,10 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         setContentView(R.layout.activity_escenario_juego_zombie);
 
         contadorZombiesTextView = findViewById(R.id.contadorZombies);
-        nombreTextView = findViewById(R.id.nombreJugador);
+
         tiempoRestateTextView = findViewById(R.id.tiempoRestante);
         zombieImageView = findViewById(R.id.imageViewZombie);
-
-        partidaPerdidaDialog = new Dialog(EscenarioJuegoZombie.this);
+        partidaPerdidaDialog = new Dialog(EscenarioJuegoZombie.this, R.style.ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Window_Fullscreen);
 
         Bundle intent = getIntent().getExtras();
 
@@ -71,7 +73,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         cantidadZombiesString = intent.getString("cantidadzombies");
         puntuacionMax = Integer.parseInt(intent.getString("puntuacionMax"));
         // ASIGNACION VALORES RECOGIDOS DEL EXTRA
-        nombreTextView.setText(nombreString);
+
         contadorZombiesTextView.setText(cantidadZombiesString);
         obtenerDatosPantalla();
         calcularTiempoRestante();
@@ -80,6 +82,21 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("BASE DE DATOS");
+
+        puntuacionCambiada = false;
+        // IMAGENES ZOMBIES
+        imagenesZombies = new ArrayList<>();
+        imagenesZombies.add(R.drawable.zombie1);
+        imagenesZombies.add(R.drawable.zombie2);
+        imagenesZombies.add(R.drawable.zombie3);
+
+        // IMAGENES FONDO
+        imagenesFondo = new ArrayList<>();
+        imagenesFondo.add(R.drawable.background1);
+        imagenesFondo.add(R.drawable.background2);
+        imagenesFondo.add(R.drawable.background3);
+        imagenesFondo.add(R.drawable.background4);
+        findViewById(R.id.layoutJuegoZombies).setBackgroundResource(imagenesFondo.get(generarNumeroAleatorio(imagenesFondo.size(), 0)));
 
 
         // EVENTO MATAR ZOMBIES
@@ -90,16 +107,16 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
                     // Aumenta el contador de zombies eliminados
                     contador++;
                     // Se cambia el texto del contador con el valor del contador
-                    contadorZombiesTextView.setText(String.valueOf(contador));
+                    contadorZombiesTextView.setText(String.valueOf(contador) + " zombies eliminados");
                     // Al hacer click sobre la imagen, se cambia por la otra imagen
-                    zombieImageView.setImageResource(R.drawable.zombieaplastado);
-
+                    //zombieImageView.setImageResource(R.drawable.zombieaplastado);
+                    zombieImageView.setImageResource(imagenesZombies.get(generarNumeroAleatorio(imagenesZombies.size(), 0)));
+                    crearZombie();
                     //Vuelve a aparecer la imagen del zombie original
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            zombieImageView.setImageResource(R.drawable.zombie);
-                            crearZombie();
+
 
                         }
                     }, generarNumeroAleatorio());
@@ -155,7 +172,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
      * Calcula el tiempo restante que le falta al jugador y lo muestra en pantalla
      */
     private void calcularTiempoRestante() {
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(10000, 1000) {
             // TIEMPO ESTA CORRIENDO, SE EJECUTA UNA VEZ POR SEGUNDO
             public void onTick(long millisUntilFinished) {
                 long tiempoRestante = millisUntilFinished / 1000;
@@ -176,17 +193,19 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
      * Muestra mediante el dialog el layout de partida_perdida_zombies
      */
     private void mostrarMensajePartidaPerdida() {
-        TextView textoPartidaPerdidaZombiesTextView;
-        TextView textoJuegoZombiesTextView;
-        TextView cantidadZombiesEliminadosTextView;
 
+        TextView textoJuegoZombiesTextView;
+        TextView textoScoreTextView;
         Button volverAJugarButton;
-        Button verPuntuacionesButton;
         Button volverMenuPrincipalButton;
         partidaPerdidaDialog.setContentView(R.layout.partida_perdida_zombies);
 
         //textoPartidaPerdidaZombiesTextView = partidaPerdidaDialog.findViewById(R.id.textoPartidaPerdidaZombies);
         textoJuegoZombiesTextView = partidaPerdidaDialog.findViewById(R.id.textoJuegoZombies);
+        textoScoreTextView = partidaPerdidaDialog.findViewById(R.id.textoPartidaPerdidaZombies);
+        if (puntuacionCambiada) {
+            textoScoreTextView.setTextColor(Color.GREEN);
+        }
 
         volverAJugarButton = partidaPerdidaDialog.findViewById(R.id.volverAJugar);
         volverMenuPrincipalButton = partidaPerdidaDialog.findViewById(R.id.volverMenuPrincipal);
@@ -229,7 +248,9 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
             reference.child(user.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    puntuacionCambiada = true;
                     Toast.makeText(EscenarioJuegoZombie.this, "La puntuacion fue actualizada!", Toast.LENGTH_SHORT).show();
+
                 }
             });
         } else {

@@ -12,16 +12,15 @@
   <androidx.appcompat.widget.LinearLayoutCompat
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:gravity="center">
+      android:gravity="center"
+      android:orientation="vertical">
+
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/zombie_login"/>
+        android:src="@drawable/zombie_login" />
 
 
-    
-    
   </androidx.appcompat.widget.LinearLayoutCompat>
 
   </RelativeLayout>

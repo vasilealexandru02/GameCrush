@@ -78,7 +78,7 @@ public class Registro extends AppCompatActivity {
                     //startActivity(new Intent(Registro.this, MenuJuego.class));
                     Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
                     insertarDatosJugador();
-                    startActivity(new Intent(Registro.this, MenuPrincipalJuegoZombie.class));
+                    startActivity(new Intent(Registro.this, Slider.class));
                     finish();
 
 

@@ -37,7 +37,7 @@ public class SliderAdapter extends PagerAdapter {
             "PROXIMAMENTE..."
     };
     public String[] descripciones_slider = {
-            "Primer juego diseño en la aplicación de GameCrush, ¡machaca a esos zombies antes de que se acabe el tiempo!",
+            "Primer juego diseñado en la aplicación de GameCrush, ¡machaca a esos zombies antes de que se acabe el tiempo!",
             "¡Próximamente más juegos disponibles en el lobby de GameCrush!"
     };
 

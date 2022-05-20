@@ -17,7 +17,7 @@ public class PrimeraVista extends AppCompatActivity {
         setContentView(R.layout.activity_primera_vista);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(PrimeraVista.this, Slider.class);
+            Intent intent = new Intent(PrimeraVista.this, MainActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);

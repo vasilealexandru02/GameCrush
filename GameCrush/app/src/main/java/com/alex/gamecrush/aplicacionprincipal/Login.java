@@ -72,8 +72,6 @@ public class Login extends AppCompatActivity {
                     assert user != null;
                     Toast.makeText(Login.this, "Bienvenido a GameCrush!", Toast.LENGTH_SHORT).show();
                     finish();
-                } else {
-
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {

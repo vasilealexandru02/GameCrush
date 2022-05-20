@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alex.gamecrush.aplicacionprincipal.MainActivity;
 import com.alex.gamecrush.R;
+import com.alex.gamecrush.aplicacionprincipal.Slider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,21 +27,20 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
 
-    Button btnCerrarSesion;
     Button btnJugar;
     Button btnPuntuaciones;
     Button btnAcercaDe;
 
-    TextView textViewPuntuacion;
     TextView textViewcantidadZombies;
     TextView textViewNombreUsuarioMenu;
-    TextView textViewUid;
-    TextView textViewTextoMenu;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference baseDeDatos;
 
+    ImageView flechaMenuJuegoZombie;
+
     String puntuacionMax;
+    String uidString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +52,21 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         baseDeDatos = firebaseDatabase.getReference("BASE DE DATOS");
 
-
-        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         btnJugar = findViewById(R.id.btnJugar);
         btnPuntuaciones = findViewById(R.id.btnPuntuaciones);
         btnAcercaDe = findViewById(R.id.btnAcercaDe);
 
-        textViewPuntuacion = findViewById(R.id.puntuacion);
+
         textViewcantidadZombies = findViewById(R.id.cantidadZombies);
         textViewNombreUsuarioMenu = findViewById(R.id.nombreUsuarioMenu);
-        textViewUid = findViewById(R.id.uid);
-        textViewTextoMenu = findViewById(R.id.textoMenu);
 
+        flechaMenuJuegoZombie = findViewById(R.id.flechaMenuJuegoZombie);
 
         // BOTON DE JUGAR
         btnJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipalJuegoZombie.this, EscenarioJuegoZombie.class);
-                String uidString = textViewUid.getText().toString();
                 String nombreString = textViewNombreUsuarioMenu.getText().toString();
                 String cantidadZombies = textViewcantidadZombies.getText().toString();
 
@@ -79,6 +76,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
                 intent.putExtra("puntuacionMax", puntuacionMax);
 
                 startActivity(intent);
+                finish();
             }
         });
         // BOTON DE VER PUNTUACIONES
@@ -96,12 +94,11 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
 
             }
         });
-
-
-        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+        flechaMenuJuegoZombie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cerrarSesion();
+                startActivity(new Intent(MenuPrincipalJuegoZombie.this, Slider.class));
+                finish();
             }
         });
     }
@@ -114,7 +111,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
 
     private void usuarioLogueado() {
         if (user != null) {
-            Toast.makeText(this, "Jugador en linea", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Jugador en linea", Toast.LENGTH_SHORT).show();
             consultarDatosJugador();
         } else {
             startActivity(new Intent(MenuPrincipalJuegoZombie.this, MainActivity.class));
@@ -144,12 +141,11 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     String cantidadZombiesString = "" + ds.child("Zombies").getValue();
                     puntuacionMax = "" + ds.child("Zombies").getValue();
-                    String uidString = "" + ds.child("Uid").getValue();
+                    uidString = "" + ds.child("Uid").getValue();
                     String nombreString = "" + ds.child("Nombre").getValue();
 
-                    textViewcantidadZombies.setText(cantidadZombiesString);
-                    textViewUid.setText(uidString);
-                    textViewNombreUsuarioMenu.setText(nombreString);
+                    textViewcantidadZombies.setText("Record: " + cantidadZombiesString);
+                    textViewNombreUsuarioMenu.setText("Bienvenido " + nombreString + " !");
 
                 }
             }

@@ -33,7 +33,7 @@
     <string name="btnAcercaDe">Acerca de</string>
 
     <!--Juego zombies-->
-    <string name="contadorZombies">0</string>
+    <string name="contadorZombies">---</string>
     <string name="nombreJugador"> --- </string>
     <string name="tiempoRestante">0</string>
 
@@ -46,6 +46,6 @@
 
 
     <!--Slider-->
-    <string name="descripcionJuegoZombie">Primer juego diseño en la aplicación de GameCrush, machaca a esos zombies antes de que se acabe el tiempo!</string>
+    <string name="descripcionJuegoZombie">Primer juego diseñado en la aplicación de GameCrush, machaca a esos zombies antes de que se acabe el tiempo!</string>
 
 </resources>
