@@ -6,13 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.alex.gamecrush.aplicacionprincipal.MainActivity;
 import com.alex.gamecrush.R;
+import com.alex.gamecrush.aplicacionprincipal.MainActivity;
 import com.alex.gamecrush.aplicacionprincipal.Slider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +40,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
 
     String puntuacionMax;
     String uidString;
+    String nombreJugador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +67,11 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipalJuegoZombie.this, EscenarioJuegoZombie.class);
-                String nombreString = textViewNombreUsuarioMenu.getText().toString();
+                //String nombreString = textViewNombreUsuarioMenu.getText().toString();
                 String cantidadZombies = textViewcantidadZombies.getText().toString();
 
                 intent.putExtra("uid", uidString);
-                intent.putExtra("nombre", nombreString);
+                intent.putExtra("nombre", nombreJugador);
                 intent.putExtra("cantidadzombies", cantidadZombies);
                 intent.putExtra("puntuacionMax", puntuacionMax);
 
@@ -120,17 +120,6 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
     }
 
     /**
-     * Cierra la sesion del usuario
-     */
-    private void cerrarSesion() {
-        auth.signOut();
-        Toast.makeText(this, "¡Has cerrado sesión!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(MenuPrincipalJuegoZombie.this, MainActivity.class));
-        overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
-
-    }
-
-    /**
      * Hace una query con todos los datos del usuario filtrado por el correo del usuario y asigna los valores a los text view
      */
     private void consultarDatosJugador() {
@@ -143,6 +132,7 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
                     puntuacionMax = "" + ds.child("Zombies").getValue();
                     uidString = "" + ds.child("Uid").getValue();
                     String nombreString = "" + ds.child("Nombre").getValue();
+                    nombreJugador = "" + ds.child("Nombre").getValue();
 
                     textViewcantidadZombies.setText("Record: " + cantidadZombiesString);
                     textViewNombreUsuarioMenu.setText("Bienvenido " + nombreString + " !");

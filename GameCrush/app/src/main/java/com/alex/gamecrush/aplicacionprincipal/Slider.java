@@ -1,10 +1,5 @@
 package com.alex.gamecrush.aplicacionprincipal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.alex.gamecrush.R;
-import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,7 +50,7 @@ public class Slider extends AppCompatActivity {
         viewPager.setAdapter(sliderAdapter);
         flechaAtras = findViewById(R.id.flechaSlider);
         textoBienvenidaSlider = findViewById(R.id.textoBienvenidaSlider);
-        consultarNombreJugador();
+        usuarioLogueado();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Deseas cerrar sesion?")
@@ -104,6 +103,17 @@ public class Slider extends AppCompatActivity {
         startActivity(new Intent(Slider.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
 
+    }
+
+    private void usuarioLogueado() {
+        if (user != null) {
+            //Toast.makeText(this, "Jugador en linea", Toast.LENGTH_SHORT).show();
+            consultarNombreJugador();
+
+        } else {
+            startActivity(new Intent(Slider.this, MainActivity.class));
+            finish();
+        }
     }
 
     @Override

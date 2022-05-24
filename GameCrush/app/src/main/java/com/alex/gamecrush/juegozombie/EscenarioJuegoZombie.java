@@ -1,11 +1,7 @@
 package com.alex.gamecrush.juegozombie;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -17,7 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.alex.gamecrush.R;
+import com.alex.gamecrush.aplicacionprincipal.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,6 +53,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     FirebaseUser user;
     FirebaseDatabase database;
     DatabaseReference reference;
+    DatabaseReference zombieKillerScoreReference;
     int puntuacionMax;
 
     @Override
@@ -82,6 +83,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("BASE DE DATOS");
+        zombieKillerScoreReference = database.getReference(Constants.DB_PUNTUACIONZOMBIE);
 
         puntuacionCambiada = false;
         // IMAGENES ZOMBIES
@@ -195,18 +197,12 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     private void mostrarMensajePartidaPerdida() {
 
         TextView textoJuegoZombiesTextView;
-        TextView textoScoreTextView;
         Button volverAJugarButton;
         Button volverMenuPrincipalButton;
         partidaPerdidaDialog.setContentView(R.layout.partida_perdida_zombies);
 
         //textoPartidaPerdidaZombiesTextView = partidaPerdidaDialog.findViewById(R.id.textoPartidaPerdidaZombies);
         textoJuegoZombiesTextView = partidaPerdidaDialog.findViewById(R.id.textoJuegoZombies);
-        textoScoreTextView = partidaPerdidaDialog.findViewById(R.id.textoPartidaPerdidaZombies);
-        if (puntuacionCambiada) {
-            textoScoreTextView.setTextColor(Color.GREEN);
-        }
-
         volverAJugarButton = partidaPerdidaDialog.findViewById(R.id.volverAJugar);
         volverMenuPrincipalButton = partidaPerdidaDialog.findViewById(R.id.volverMenuPrincipal);
         //verPuntuacionesButton = partidaPerdidaDialog.findViewById(R.id.verPuntuaciones);
@@ -228,6 +224,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(EscenarioJuegoZombie.this, MenuPrincipalJuegoZombie.class));
+                partidaPerdidaDialog.dismiss();
                 finish();
             }
         });
@@ -243,9 +240,9 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
 
     private void actualizarPuntuacion(String key, int cantidadZombies) {
         if (cantidadZombies > puntuacionMax) {
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put(key, cantidadZombies);
-            reference.child(user.getUid()).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            HashMap<String, Object> datosJugador = new HashMap<>();
+            datosJugador.put(key, cantidadZombies);
+            reference.child(user.getUid()).updateChildren(datosJugador).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     puntuacionCambiada = true;
@@ -257,6 +254,11 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
             Toast.makeText(EscenarioJuegoZombie.this, "Tu puntuacion ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
         }
 
+        HashMap<String, Object> puntuacionZombieKiller = new HashMap<>();
+        puntuacionZombieKiller.put("Jugador", nombreString);
+        puntuacionZombieKiller.put("Zombies", contador);
+
+        zombieKillerScoreReference.child(uidString).setValue(puntuacionZombieKiller);
     }
 
     public void finish() {

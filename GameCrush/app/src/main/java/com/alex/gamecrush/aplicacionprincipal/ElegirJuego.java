@@ -3,7 +3,9 @@ package com.alex.gamecrush.aplicacionprincipal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
 import com.alex.gamecrush.R;
+
 public class ElegirJuego extends AppCompatActivity {
 
     @Override
