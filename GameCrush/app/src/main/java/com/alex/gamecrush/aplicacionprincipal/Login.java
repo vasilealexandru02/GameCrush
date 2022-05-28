@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,33 +22,44 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    EditText emailLogin;
-    EditText passwordLogin;
-    Button botonLogin;
-    FirebaseAuth auth;
+    private EditText emailLoginEditText;
+    private EditText passwordLoginEditText;
+
+    private TextView passwordOlvidadaTextView;
+
+    private Button botonLogin;
+    private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailLogin = findViewById(R.id.emailLogin);
-        passwordLogin = findViewById(R.id.passwordLogin);
+        emailLoginEditText = findViewById(R.id.emailLogin);
+        passwordLoginEditText = findViewById(R.id.passwordLogin);
         botonLogin = findViewById(R.id.botonLogin);
         auth = FirebaseAuth.getInstance();
 
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailLogin.getText().toString();
-                String password = passwordLogin.getText().toString();
+                String email = emailLoginEditText.getText().toString();
+                String password = passwordLoginEditText.getText().toString();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    emailLogin.setError("Correo no válido!");
-                    emailLogin.setFocusable(true);
-                } else if (passwordLogin.length() < 8) {
-                    passwordLogin.setError("La contraseña debe contener más de 8 caracteres");
+                    emailLoginEditText.setError("Correo no existente!");
+                    emailLoginEditText.setFocusable(true);
                 } else {
                     loginJugador(email, password);
                 }
+            }
+        });
+
+        passwordOlvidadaTextView = findViewById(R.id.passwordOlvidada);
+        passwordOlvidadaTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, PasswordOlvidada.class));
+                finish();
             }
         });
 

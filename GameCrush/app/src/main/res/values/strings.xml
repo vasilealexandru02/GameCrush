@@ -18,8 +18,12 @@
     <string name="emailLogin">Correo electrónico</string>
     <string name="passwordLogin">Contraseña</string>
     <string name="botonLogin">Iniciar sesión</string>
+    <string name="passwordOlvidada">¿Has olvidado tu contraseña?</string>
+    <!--Actividad password olvidada-->
 
-
+    <string name="botonPasswordOlvidada">RECUPERAR</string>
+    <string name="textViewPasswordOlvidada">Recuperación de contraseña</string>
+    <string name="hintPasswordOlvidada">Introduce tu correo electrónico</string>
     <!--Menu-->
     <string name="puntuacion">Puntuación</string>
     <string name="cantidadZombies"> --</string>

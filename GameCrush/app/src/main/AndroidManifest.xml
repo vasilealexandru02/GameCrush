@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCrush">
         <activity
-            android:name=".aplicacionprincipal.Slider"
+            android:name=".aplicacionprincipal.PasswordOlvidada"
             android:exported="true" />
         <activity
-            android:name=".aplicacionprincipal.ElegirJuego"
+            android:name=".aplicacionprincipal.Slider"
             android:exported="true" />
         <activity
             android:name=".juegozombie.EscenarioJuegoZombie"

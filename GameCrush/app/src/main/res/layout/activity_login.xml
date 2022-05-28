@@ -14,9 +14,11 @@
         android:background="@color/azulvanta"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="150dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp">
+        android:paddingTop="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,6 +50,14 @@
                 android:hint="@string/passwordLogin"
                 android:inputType="textPassword"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/passwordOlvidada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/passwordOlvidada"
+                android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

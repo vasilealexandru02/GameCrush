@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.UUID;
 
 public class EscenarioJuegoZombie extends AppCompatActivity {
     String uidString;
@@ -45,7 +46,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     int contador = 0;
     int altoPantalla;
     int anchoPantalla;
-
+    int numeroScore;
     boolean partidaPerdida = false;
     Dialog partidaPerdidaDialog;
 
@@ -125,6 +126,7 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
                 }
             }
         });
+        numeroScore = 0;
     }
 
     /**
@@ -253,12 +255,12 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         } else {
             Toast.makeText(EscenarioJuegoZombie.this, "Tu puntuacion ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
         }
-
+        numeroScore++;
         HashMap<String, Object> puntuacionZombieKiller = new HashMap<>();
         puntuacionZombieKiller.put("Jugador", nombreString);
         puntuacionZombieKiller.put("Zombies", contador);
 
-        zombieKillerScoreReference.child(uidString).setValue(puntuacionZombieKiller);
+        zombieKillerScoreReference.child(String.valueOf(UUID.randomUUID())).setValue(puntuacionZombieKiller);
     }
 
     public void finish() {

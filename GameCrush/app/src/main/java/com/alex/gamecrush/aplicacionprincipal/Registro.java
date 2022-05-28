@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,35 +27,40 @@ import java.util.HashMap;
 
 public class Registro extends AppCompatActivity {
     FirebaseAuth auth;
-    EditText nombreUsuario;
-    EditText emailUsuario;
-    EditText passwordUsuario;
-    TextView fechaRegistro;
-    Button registrarUsuario;
+
+
+    EditText nombreUsuarioEditText;
+    EditText emailUsuarioEditText;
+    EditText passwordUsuarioEditText;
+
+    TextView fechaRegistroTextView;
+
+    Button registrarUsuarioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        nombreUsuario = findViewById(R.id.nombreUsuario);
-        emailUsuario = findViewById(R.id.emailUsuario);
-        passwordUsuario = findViewById(R.id.passwordUsuario);
-        fechaRegistro = findViewById(R.id.fechaRegistro);
-        registrarUsuario = findViewById(R.id.registrarUsuario);
+        nombreUsuarioEditText = findViewById(R.id.nombreUsuario);
+        emailUsuarioEditText = findViewById(R.id.emailUsuario);
+        passwordUsuarioEditText = findViewById(R.id.passwordUsuario);
+        fechaRegistroTextView = findViewById(R.id.fechaRegistro);
+        registrarUsuarioButton = findViewById(R.id.registrarUsuario);
         auth = FirebaseAuth.getInstance();
+
         Date date = new Date();
 
         SimpleDateFormat sdt = new SimpleDateFormat("MM/dd/yyyy");
         String fechaString = sdt.format(date);
-        fechaRegistro.setText(fechaString);
-        registrarUsuario.setOnClickListener(v -> {
-            String email = emailUsuario.getText().toString();
-            String password = passwordUsuario.getText().toString();
+        fechaRegistroTextView.setText(fechaString);
+        registrarUsuarioButton.setOnClickListener(v -> {
+            String email = emailUsuarioEditText.getText().toString();
+            String password = passwordUsuarioEditText.getText().toString();
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                emailUsuario.setError("Correo no válido!");
-                emailUsuario.setFocusable(true);
+                emailUsuarioEditText.setError("Correo no válido!");
+                emailUsuarioEditText.setFocusable(true);
             } else if (password.length() < 8) {
-                passwordUsuario.setError("La contraseña debe contener más de 8 caracteres");
+                passwordUsuarioEditText.setError("La contraseña debe contener más de 8 caracteres");
             } else {
                 registrarUsuario(email, password);
             }
@@ -74,10 +80,17 @@ public class Registro extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     // Una vez registrado el usuario, se cambia de actividad a la del menu
                     //startActivity(new Intent(Registro.this, MenuJuego.class));
-                    Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
-                    insertarDatosJugador();
-                    startActivity(new Intent(Registro.this, Slider.class));
-                    finish();
+                    FirebaseUser user = auth.getCurrentUser();
+                    Toast.makeText(Registro.this, "Usuario registrado correctamente.", Toast.LENGTH_SHORT).show();
+                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            insertarDatosJugador();
+                            startActivity(new Intent(Registro.this, Slider.class));
+                            finish();
+                        }
+                    });
 
 
                 } else {
@@ -101,10 +114,10 @@ public class Registro extends AppCompatActivity {
     private void insertarDatosJugador() {
         int cantidadZombiesEliminados = 0;
         String uidString = auth.getCurrentUser().getUid();
-        String emailString = emailUsuario.getText().toString();
-        String passwordString = passwordUsuario.getText().toString();
-        String nombreUsuarioString = nombreUsuario.getText().toString();
-        String fechaString = fechaRegistro.getText().toString();
+        String emailString = emailUsuarioEditText.getText().toString();
+        String passwordString = passwordUsuarioEditText.getText().toString();
+        String nombreUsuarioString = nombreUsuarioEditText.getText().toString();
+        String fechaString = fechaRegistroTextView.getText().toString();
         HashMap<Object, Object> datosUsuario = new HashMap<>();
         datosUsuario.put("Uid", uidString); // uid del usuario
         datosUsuario.put("Email", emailString); // email del usuario
