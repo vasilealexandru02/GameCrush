@@ -9,25 +9,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alex.gamecrush.R;
 
 public class  MainActivity extends AppCompatActivity {
-    Button btnLogin;
-    Button btnRegistro;
+    Button loginButton;
+    Button registroButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegistro = findViewById(R.id.btnRegistro);
+        loginButton = findViewById(R.id.btnLogin);
+        registroButton = findViewById(R.id.btnRegistro);
 
 
-        btnLogin.setOnClickListener(v -> {
+        loginButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Login.class));
             overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);
 
         });
 
-        btnRegistro.setOnClickListener(v -> {
+        registroButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Registro.class));
             overridePendingTransition(R.anim.slide_right, R.anim.slide_outleft);
         });

@@ -83,7 +83,9 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
+        // referencia tabla base de datos
         reference = database.getReference("BASE DE DATOS");
+        // referencia tabla puntuacion zombie killer
         zombieKillerScoreReference = database.getReference(Constants.DB_PUNTUACIONZOMBIE);
 
         puntuacionCambiada = false;
@@ -96,7 +98,6 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
         // IMAGENES FONDO
         imagenesFondo = new ArrayList<>();
         imagenesFondo.add(R.drawable.background1);
-        imagenesFondo.add(R.drawable.background2);
         imagenesFondo.add(R.drawable.background3);
         imagenesFondo.add(R.drawable.background4);
         findViewById(R.id.layoutJuegoZombies).setBackgroundResource(imagenesFondo.get(generarNumeroAleatorio(imagenesFondo.size(), 0)));
@@ -248,12 +249,12 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     puntuacionCambiada = true;
-                    Toast.makeText(EscenarioJuegoZombie.this, "La puntuacion fue actualizada!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EscenarioJuegoZombie.this, "La puntuación fue actualizada!", Toast.LENGTH_SHORT).show();
 
                 }
             });
         } else {
-            Toast.makeText(EscenarioJuegoZombie.this, "Tu puntuacion ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EscenarioJuegoZombie.this, "Tu puntuación ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
         }
         numeroScore++;
         HashMap<String, Object> puntuacionZombieKiller = new HashMap<>();

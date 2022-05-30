@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundLightBlue"
+    android:background="@drawable/gradient"
     tools:context=".juegozombie.MenuPrincipalJuegoZombie">
 
 
@@ -12,9 +12,9 @@
         android:id="@+id/flechaMenuJuegoZombie"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
         android:clickable="true"
         android:src="@drawable/flecha_izquierda"
+        app:layout_constraintBottom_toTopOf="@+id/imagenMenu"
         app:layout_constraintEnd_toStartOf="@+id/nombreUsuarioMenu"
         app:layout_constraintHorizontal_bias="0.132"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,17 +23,16 @@
     <TextView
         android:id="@+id/nombreUsuarioMenu"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+
         android:text="@string/cantidadZombies"
-        android:textColor="@color/azulvanta"
+        android:textColor="@color/white"
         android:textSize="20dp"
-        app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/imagenMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.264" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imagenMenu"
@@ -57,8 +56,8 @@
         android:layout_marginBottom="24dp"
         android:gravity="center"
         android:text="@string/cantidadZombies"
-        android:textColor="@color/azulvanta"
-        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/btnJugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

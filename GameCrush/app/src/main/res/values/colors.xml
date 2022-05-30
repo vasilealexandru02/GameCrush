@@ -18,5 +18,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorwhite">#FFFFFF</color>
     <color name="colorTransparentwhite">#cccccc</color>
+    <color name="azuldark">#070c1c</color>
+    <color name="naranja">#c91414</color>
 
 </resources>

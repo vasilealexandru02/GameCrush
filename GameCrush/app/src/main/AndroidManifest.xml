@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCrush">
         <activity
+            android:name=".juegozombie.PuntuacionesZombieKiller"
+            android:exported="true" />
+        <activity
+            android:name=".juegobird.MenuPrincipalBird"
+            android:exported="true" />
+        <activity
             android:name=".aplicacionprincipal.PasswordOlvidada"
             android:exported="true" />
         <activity

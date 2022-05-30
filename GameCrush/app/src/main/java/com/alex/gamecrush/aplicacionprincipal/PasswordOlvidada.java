@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PasswordOlvidada extends AppCompatActivity {
 
-    private EditText emailRecuperacion;
+    private EditText emailRecuperacionEditText;
     private Button resetPasswordButton;
     private ProgressBar progressBar;
 
@@ -29,7 +29,7 @@ public class PasswordOlvidada extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_olvidada);
-        emailRecuperacion = findViewById(R.id.emailRecuperacion);
+        emailRecuperacionEditText = findViewById(R.id.emailRecuperacion);
         resetPasswordButton = findViewById(R.id.botonRecuperacion);
         progressBar = findViewById(R.id.progressBar);
 
@@ -45,22 +45,22 @@ public class PasswordOlvidada extends AppCompatActivity {
     }
 
     private void resetPassword() {
-        String email = emailRecuperacion.getText().toString().trim();
+        String email = emailRecuperacionEditText.getText().toString().trim();
         if (email.isEmpty()) {
-            emailRecuperacion.setError("Correo es requerido!");
-            emailRecuperacion.requestFocus();
+            emailRecuperacionEditText.setError("Correo es requerido!");
+            emailRecuperacionEditText.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailRecuperacion.setError("Por favor introduce un correo válido!");
-            emailRecuperacion.requestFocus();
+            emailRecuperacionEditText.setError("Por favor introduce un correo válido!");
+            emailRecuperacionEditText.requestFocus();
             return;
 
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        progressBar.incrementProgressBy(100);
+
 
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -68,6 +68,7 @@ public class PasswordOlvidada extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(PasswordOlvidada.this, "Mira tu correo electrónico para reestablecer tu contraseña", Toast.LENGTH_SHORT).show();
                 } else {
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(PasswordOlvidada.this, "Hubo un error recuperando la contraseña :(", Toast.LENGTH_SHORT).show();
                 }
             }

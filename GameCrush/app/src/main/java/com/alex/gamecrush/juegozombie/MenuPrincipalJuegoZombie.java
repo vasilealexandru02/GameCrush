@@ -26,12 +26,12 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
 
-    Button btnJugar;
-    Button btnPuntuaciones;
-    Button btnAcercaDe;
+    Button jugarButton;
+    Button puntuacionesButton;
+    Button acercaDeButton;
 
-    TextView textViewcantidadZombies;
-    TextView textViewNombreUsuarioMenu;
+    TextView cantidadZombiesTextView;
+    TextView nombreUsuarioMenuTextView;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference baseDeDatos;
@@ -52,23 +52,23 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         baseDeDatos = firebaseDatabase.getReference("BASE DE DATOS");
 
-        btnJugar = findViewById(R.id.btnJugar);
-        btnPuntuaciones = findViewById(R.id.btnPuntuaciones);
-        btnAcercaDe = findViewById(R.id.btnAcercaDe);
+        jugarButton = findViewById(R.id.btnJugar);
+        puntuacionesButton = findViewById(R.id.btnPuntuaciones);
+        acercaDeButton = findViewById(R.id.btnAcercaDe);
 
 
-        textViewcantidadZombies = findViewById(R.id.cantidadZombies);
-        textViewNombreUsuarioMenu = findViewById(R.id.nombreUsuarioMenu);
+        cantidadZombiesTextView = findViewById(R.id.cantidadZombies);
+        nombreUsuarioMenuTextView = findViewById(R.id.nombreUsuarioMenu);
 
         flechaMenuJuegoZombie = findViewById(R.id.flechaMenuJuegoZombie);
 
         // BOTON DE JUGAR
-        btnJugar.setOnClickListener(new View.OnClickListener() {
+        jugarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipalJuegoZombie.this, EscenarioJuegoZombie.class);
                 //String nombreString = textViewNombreUsuarioMenu.getText().toString();
-                String cantidadZombies = textViewcantidadZombies.getText().toString();
+                String cantidadZombies = cantidadZombiesTextView.getText().toString();
 
                 intent.putExtra("uid", uidString);
                 intent.putExtra("nombre", nombreJugador);
@@ -80,20 +80,25 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
             }
         });
         // BOTON DE VER PUNTUACIONES
-        btnPuntuaciones.setOnClickListener(new View.OnClickListener() {
+        puntuacionesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MenuPrincipalJuegoZombie.this, PuntuacionesZombieKiller.class);
+                intent.putExtra("nombre", nombreJugador);
+                startActivity(intent);
+                finish();
             }
         });
 
         // BOTON DE ACERCA DE
-        btnAcercaDe.setOnClickListener(new View.OnClickListener() {
+        acercaDeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
+        // FLECHA VOLVER ATRAS
         flechaMenuJuegoZombie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,8 +139,8 @@ public class MenuPrincipalJuegoZombie extends AppCompatActivity {
                     String nombreString = "" + ds.child("Nombre").getValue();
                     nombreJugador = "" + ds.child("Nombre").getValue();
 
-                    textViewcantidadZombies.setText("Record: " + cantidadZombiesString);
-                    textViewNombreUsuarioMenu.setText("Bienvenido " + nombreString + " !");
+                    cantidadZombiesTextView.setText("Record: " + cantidadZombiesString);
+                    nombreUsuarioMenuTextView.setText("Jugador: " + nombreString);
 
                 }
             }

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.alex.gamecrush.R;
+import com.alex.gamecrush.juegobird.MenuPrincipalBird;
 import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
 
 public class SliderAdapter extends PagerAdapter {
@@ -21,6 +22,7 @@ public class SliderAdapter extends PagerAdapter {
     Context context;
     LayoutInflater layourInflater;
     Slider slider = new Slider();
+
 
     public SliderAdapter(Context context) {
         this.context = context;
@@ -75,7 +77,8 @@ public class SliderAdapter extends PagerAdapter {
 
                 }
                 if (position == 1) {
-                    Toast.makeText(context, "Próximamente mas juegos... :)", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Próximamente mas juegos... :)", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, MenuPrincipalBird.class));
                 }
             }
         });
