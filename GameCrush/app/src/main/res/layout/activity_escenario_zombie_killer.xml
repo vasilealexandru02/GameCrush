@@ -2,23 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutJuegoZombies"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layoutJuegoZombies"
-    tools:context=".juegozombie.EscenarioJuegoZombie">
+    tools:context=".zombiekiller.EscenarioJuegoZombieKiller">
 
 
     <!--Informacion partida-->
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/escenarioZombieKiller"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -60,8 +61,14 @@
                 android:id="@+id/imageViewZombie"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:src="@drawable/zombie_login" />
+                android:src="@drawable/zombie1" />
 
+            <ImageView
+                android:id="@+id/pistolaEscenario"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/pistol"
+                android:visibility="gone" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

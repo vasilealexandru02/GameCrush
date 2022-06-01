@@ -13,12 +13,14 @@
     <color name="cerrarSesion">#EB3434</color>
     <color name="azulOscuro">#293241</color>
     <color name="azulvanta">#00171f</color>
+    <color name="verde">#0d6e0b</color>
+    <color name="azuldark">#070c1c</color>
+    <color name="naranja">#c91414</color>
     <!--Deslizable-->
     <color name="colorPrimary">#262938</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorwhite">#FFFFFF</color>
     <color name="colorTransparentwhite">#cccccc</color>
-    <color name="azuldark">#070c1c</color>
-    <color name="naranja">#c91414</color>
+
 
 </resources>

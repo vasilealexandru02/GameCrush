@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCrush">
         <activity
-            android:name=".juegozombie.PuntuacionesZombieKiller"
+            android:name=".zombiekiller.PuntuacionesZombieKiller"
             android:exported="true" />
         <activity
             android:name=".juegobird.MenuPrincipalBird"
@@ -22,7 +22,7 @@
             android:name=".aplicacionprincipal.Slider"
             android:exported="true" />
         <activity
-            android:name=".juegozombie.EscenarioJuegoZombie"
+            android:name=".zombiekiller.EscenarioJuegoZombieKiller"
             android:exported="true" />
         <activity
             android:name=".aplicacionprincipal.PrimeraVista"
@@ -37,7 +37,7 @@
             android:name=".aplicacionprincipal.Registro"
             android:exported="true" />
         <activity
-            android:name=".juegozombie.MenuPrincipalJuegoZombie"
+            android:name=".zombiekiller.MenuZombieKiller"
             android:exported="true" />
         <activity
             android:name=".aplicacionprincipal.Login"

@@ -1,4 +1,4 @@
-package com.alex.gamecrush.juegozombie;
+package com.alex.gamecrush.zombiekiller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,11 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class PuntuacionesZombieKiller extends AppCompatActivity {
@@ -54,7 +50,7 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
         flechaVolverAtrasImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PuntuacionesZombieKiller.this, Slider.class));
+                startActivity(new Intent(PuntuacionesZombieKiller.this, MenuZombieKiller.class));
                 finish();
             }
         });

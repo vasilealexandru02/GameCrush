@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".juegozombie.MenuPrincipalJuegoZombie">
+    tools:context=".zombiekiller.MenuZombieKiller">
 
 
     <ImageView
@@ -36,24 +36,24 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imagenMenu"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="156dp"
+        android:layout_width="129dp"
+        android:layout_height="117dp"
 
+        android:layout_marginTop="110dp"
         android:src="@drawable/zombie_menu"
         app:layout_constraintBottom_toTopOf="@+id/cantidadZombies"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <TextView
         android:id="@+id/cantidadZombies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/cantidadZombies"
         android:textColor="@color/white"

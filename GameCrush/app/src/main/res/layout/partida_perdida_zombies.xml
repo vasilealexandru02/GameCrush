@@ -53,22 +53,13 @@
         android:id="@+id/volverAJugar"
         android:layout_width="300dp"
         android:layout_height="60dp"
+        android:layout_marginTop="68dp"
         android:text="@string/volverAJugar"
-        app:layout_constraintBottom_toTopOf="@+id/verPuntuaciones"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenMenu" />
-
-    <Button
-        android:id="@+id/verPuntuaciones"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:text="@string/verPuntuaciones"
-        app:layout_constraintBottom_toTopOf="@+id/volverMenuPrincipal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volverAJugar" />
+        app:layout_constraintTop_toBottomOf="@+id/imagenMenu"
+        android:backgroundTint="@color/verde"/>
 
     <Button
         android:id="@+id/volverMenuPrincipal"
@@ -77,8 +68,10 @@
         android:text="@string/volverMenuPrincipal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verPuntuaciones" />
+        app:layout_constraintTop_toBottomOf="@+id/volverAJugar"
+        app:layout_constraintVertical_bias="0.232" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

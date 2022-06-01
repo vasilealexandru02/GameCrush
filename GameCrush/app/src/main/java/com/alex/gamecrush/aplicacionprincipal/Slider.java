@@ -85,8 +85,6 @@ public class Slider extends AppCompatActivity {
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     String nombreString = "" + ds.child("Nombre").getValue();
                     textoBienvenidaSlider.setText(new StringBuilder().append("Bienvenido ").append(nombreString).append(" !").toString());
-
-
                 }
             }
 

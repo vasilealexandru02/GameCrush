@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.alex.gamecrush.R;
 import com.alex.gamecrush.juegobird.MenuPrincipalBird;
-import com.alex.gamecrush.juegozombie.MenuPrincipalJuegoZombie;
+import com.alex.gamecrush.zombiekiller.MenuZombieKiller;
 
 public class SliderAdapter extends PagerAdapter {
 
@@ -71,7 +70,7 @@ public class SliderAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 if (position == 0) {
-                    Intent intent = new Intent(context, MenuPrincipalJuegoZombie.class);
+                    Intent intent = new Intent(context, MenuZombieKiller.class);
                     context.startActivity(intent);
                     slider.finish();
 

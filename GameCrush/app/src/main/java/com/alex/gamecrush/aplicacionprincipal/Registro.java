@@ -50,7 +50,7 @@ public class Registro extends AppCompatActivity {
 
         Date date = new Date();
 
-        SimpleDateFormat sdt = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sdt = new SimpleDateFormat("dd/MM/yyyy");
         String fechaString = sdt.format(date);
         fechaRegistroTextView.setText(fechaString);
         registrarUsuarioButton.setOnClickListener(v -> {

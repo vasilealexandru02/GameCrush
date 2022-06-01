@@ -1,4 +1,4 @@
-package com.alex.gamecrush.juegozombie;
+package com.alex.gamecrush.zombiekiller;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -30,16 +30,18 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
-public class EscenarioJuegoZombie extends AppCompatActivity {
-    String uidString;
+public class EscenarioJuegoZombieKiller extends AppCompatActivity {
+    //String uidString;
     String nombreString;
-
     String cantidadZombiesString;
 
     TextView contadorZombiesTextView;
-    TextView tiempoRestateTextView;
+    TextView tiempoRestanteTextView;
+
     boolean puntuacionCambiada;
     ImageView zombieImageView;
+    ImageView pistolaImageView;
+
     ArrayList<Integer> imagenesZombies;
     ArrayList<Integer> imagenesFondo;
 
@@ -47,6 +49,8 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     int altoPantalla;
     int anchoPantalla;
     int numeroScore;
+    int puntuacionMax;
+
     boolean partidaPerdida = false;
     Dialog partidaPerdidaDialog;
 
@@ -55,28 +59,30 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference zombieKillerScoreReference;
-    int puntuacionMax;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_escenario_juego_zombie);
+        setContentView(R.layout.activity_escenario_zombie_killer);
 
         contadorZombiesTextView = findViewById(R.id.contadorZombies);
 
-        tiempoRestateTextView = findViewById(R.id.tiempoRestante);
+        tiempoRestanteTextView = findViewById(R.id.tiempoRestante);
         zombieImageView = findViewById(R.id.imageViewZombie);
-        partidaPerdidaDialog = new Dialog(EscenarioJuegoZombie.this, R.style.ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Window_Fullscreen);
+        pistolaImageView = findViewById(R.id.pistolaEscenario);
+
+        partidaPerdidaDialog = new Dialog(EscenarioJuegoZombieKiller.this, R.style.ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Window_Fullscreen);
 
         Bundle intent = getIntent().getExtras();
 
-        uidString = intent.getString("uid");
+        //uidString = intent.getString("uid");
         nombreString = intent.getString("nombre");
         cantidadZombiesString = intent.getString("cantidadzombies");
         puntuacionMax = Integer.parseInt(intent.getString("puntuacionMax"));
         // ASIGNACION VALORES RECOGIDOS DEL EXTRA
 
-        contadorZombiesTextView.setText(cantidadZombiesString);
+        contadorZombiesTextView.setText("0 zombies eliminados");
         obtenerDatosPantalla();
         calcularTiempoRestante();
 
@@ -115,19 +121,26 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
                     // Al hacer click sobre la imagen, se cambia por la otra imagen
                     //zombieImageView.setImageResource(R.drawable.zombieaplastado);
                     zombieImageView.setImageResource(imagenesZombies.get(generarNumeroAleatorio(imagenesZombies.size(), 0)));
-                    crearZombie();
+                    pistolaImageView.setVisibility(View.VISIBLE);
+                    pistolaImageView.setX(zombieImageView.getX() + zombieImageView.getWidth() / 2);
+                    pistolaImageView.setY(zombieImageView.getY() + zombieImageView.getHeight() / 3);
+
+
                     //Vuelve a aparecer la imagen del zombie original
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
 
-
+                            crearZombie();
+                            pistolaImageView.setVisibility(View.GONE);
                         }
                     }, generarNumeroAleatorio());
                 }
             }
         });
+
         numeroScore = 0;
+
     }
 
     /**
@@ -177,16 +190,16 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
      * Calcula el tiempo restante que le falta al jugador y lo muestra en pantalla
      */
     private void calcularTiempoRestante() {
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(generarNumeroAleatorio(15000, 5000), 1000) {
             // TIEMPO ESTA CORRIENDO, SE EJECUTA UNA VEZ POR SEGUNDO
             public void onTick(long millisUntilFinished) {
                 long tiempoRestante = millisUntilFinished / 1000;
-                tiempoRestateTextView.setText(tiempoRestante + "S");
+                tiempoRestanteTextView.setText(tiempoRestante + "S");
             }
 
             // TIEMPO SE ACABA
             public void onFinish() {
-                tiempoRestateTextView.setText("0S");
+                tiempoRestanteTextView.setText("0S");
                 partidaPerdida = true;
                 mostrarMensajePartidaPerdida();
                 actualizarPuntuacion("Zombies", contador);
@@ -223,10 +236,11 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
                 crearZombie();
             }
         });
+
         volverMenuPrincipalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EscenarioJuegoZombie.this, MenuPrincipalJuegoZombie.class));
+                startActivity(new Intent(EscenarioJuegoZombieKiller.this, MenuZombieKiller.class));
                 partidaPerdidaDialog.dismiss();
                 finish();
             }
@@ -249,14 +263,15 @@ public class EscenarioJuegoZombie extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     puntuacionCambiada = true;
-                    Toast.makeText(EscenarioJuegoZombie.this, "La puntuación fue actualizada!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EscenarioJuegoZombieKiller.this, "La puntuación fue actualizada!", Toast.LENGTH_SHORT).show();
 
                 }
             });
         } else {
-            Toast.makeText(EscenarioJuegoZombie.this, "Tu puntuación ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EscenarioJuegoZombieKiller.this, "Tu puntuación ha sido demasiado baja!", Toast.LENGTH_SHORT).show();
         }
         numeroScore++;
+        // Se insertan los scores a la tabla de puntuaciones zombie killer
         HashMap<String, Object> puntuacionZombieKiller = new HashMap<>();
         puntuacionZombieKiller.put("Jugador", nombreString);
         puntuacionZombieKiller.put("Zombies", contador);

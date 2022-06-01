@@ -1,4 +1,4 @@
-package com.alex.gamecrush.juegozombie;
+package com.alex.gamecrush.zombiekiller;
 
 public class ListElement {
     public String color;
