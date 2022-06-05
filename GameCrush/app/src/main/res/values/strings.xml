@@ -36,17 +36,19 @@
     <string name="btnPuntuaciones">Ver puntuaciones</string>
     <string name="btnAcercaDe">Acerca de</string>
 
-    <!--Juego zombies-->
+    <!--Zombie Killer-->
     <string name="contadorZombies">---</string>
     <string name="nombreJugador"> --- </string>
     <string name="tiempoRestante">0</string>
 
-    <!--PARTIDA PERDIDA JUEGO ZOMBIES-->
+    <!--Partida perdida Zombie Killer-->
     <string name="textoPartidaPerdidaZombies">¡Has perdido!</string>
     <string name="textoJuegoZombies">Has asesinado </string>
     <string name="volverAJugar">Reintentar</string>
     <string name="verPuntuaciones">Puntuaciones</string>
     <string name="volverMenuPrincipal">Menu principal</string>
+    <string name ="acercaDeZombieKiller">Primer juego desarrollado por el equipo de GameCrush. El objetivo del juego es matar a la máxima
+    cantidad de zombies... ¿o no? Si quieres sabes más busca a través de la aplicación :)</string>
 
 
     <!--Slider-->

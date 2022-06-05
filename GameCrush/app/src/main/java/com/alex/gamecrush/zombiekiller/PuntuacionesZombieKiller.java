@@ -104,25 +104,4 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
             }
         });
     }
-
-    public void consultarScoreJugadores() {
-
-        Query query = baseDeDatos.orderByChild("Zombies");
-
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String cantidadZombiesString = "" + ds.child("Zombies").getValue();
-                    String jugadorString = "" + ds.child("Jugador").getValue();
-                    elementos.add(new ListElement("#000000", jugadorString, cantidadZombiesString));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 }

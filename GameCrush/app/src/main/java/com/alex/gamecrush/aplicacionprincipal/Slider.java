@@ -31,9 +31,9 @@ public class Slider extends AppCompatActivity {
     private SliderAdapter sliderAdapter;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference baseDeDatos;
-    TextView textoBienvenidaSlider;
+    TextView textoBienvenidaSliderTextView;
     //
-    ImageView flechaAtras;
+    ImageView flechaAtrasImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class Slider extends AppCompatActivity {
         viewPager = findViewById(R.id.slider);
         sliderAdapter = new SliderAdapter(this);
         viewPager.setAdapter(sliderAdapter);
-        flechaAtras = findViewById(R.id.flechaSlider);
-        textoBienvenidaSlider = findViewById(R.id.textoBienvenidaSlider);
+        flechaAtrasImageView = findViewById(R.id.flechaSlider);
+        textoBienvenidaSliderTextView = findViewById(R.id.textoBienvenidaSlider);
         usuarioLogueado();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Deseas cerrar sesion?")
+        AlertDialog.Builder messageAlertDialog = new AlertDialog.Builder(this);
+        messageAlertDialog.setMessage("¿Deseas cerrar sesion?")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -68,11 +68,11 @@ public class Slider extends AppCompatActivity {
 
             }
         });
-        flechaAtras.setOnClickListener(new View.OnClickListener() {
+        flechaAtrasImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(Slider.this, "Texto", Toast.LENGTH_SHORT).show();
-                builder.show();
+                messageAlertDialog.show();
             }
         });
     }
@@ -84,7 +84,7 @@ public class Slider extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     String nombreString = "" + ds.child("Nombre").getValue();
-                    textoBienvenidaSlider.setText(new StringBuilder().append("Bienvenido ").append(nombreString).append(" !").toString());
+                    textoBienvenidaSliderTextView.setText(new StringBuilder().append("Bienvenido ").append(nombreString).append(" !").toString());
                 }
             }
 

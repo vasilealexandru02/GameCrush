@@ -40,7 +40,6 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
 
     boolean puntuacionCambiada;
     ImageView zombieImageView;
-    ImageView pistolaImageView;
 
     ArrayList<Integer> imagenesZombies;
     ArrayList<Integer> imagenesFondo;
@@ -70,7 +69,7 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
 
         tiempoRestanteTextView = findViewById(R.id.tiempoRestante);
         zombieImageView = findViewById(R.id.imageViewZombie);
-        pistolaImageView = findViewById(R.id.pistolaEscenario);
+
 
         partidaPerdidaDialog = new Dialog(EscenarioJuegoZombieKiller.this, R.style.ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Window_Fullscreen);
 
@@ -98,8 +97,9 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
         // IMAGENES ZOMBIES
         imagenesZombies = new ArrayList<>();
         imagenesZombies.add(R.drawable.zombie1);
-        imagenesZombies.add(R.drawable.zombie2);
+        //imagenesZombies.add(R.drawable.zombie2);
         imagenesZombies.add(R.drawable.zombie3);
+        imagenesZombies.add(R.drawable.zombie4);
 
         // IMAGENES FONDO
         imagenesFondo = new ArrayList<>();
@@ -121,18 +121,16 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
                     // Al hacer click sobre la imagen, se cambia por la otra imagen
                     //zombieImageView.setImageResource(R.drawable.zombieaplastado);
                     zombieImageView.setImageResource(imagenesZombies.get(generarNumeroAleatorio(imagenesZombies.size(), 0)));
-                    pistolaImageView.setVisibility(View.VISIBLE);
-                    pistolaImageView.setX(zombieImageView.getX() + zombieImageView.getWidth() / 2);
-                    pistolaImageView.setY(zombieImageView.getY() + zombieImageView.getHeight() / 3);
 
+                    crearZombie();
 
                     //Vuelve a aparecer la imagen del zombie original
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
 
-                            crearZombie();
-                            pistolaImageView.setVisibility(View.GONE);
+
+
                         }
                     }, generarNumeroAleatorio());
                 }

@@ -63,12 +63,6 @@
                 android:layout_height="180dp"
                 android:src="@drawable/zombie1" />
 
-            <ImageView
-                android:id="@+id/pistolaEscenario"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/pistol"
-                android:visibility="gone" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
