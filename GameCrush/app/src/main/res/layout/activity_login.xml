@@ -76,7 +76,7 @@
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/giflogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

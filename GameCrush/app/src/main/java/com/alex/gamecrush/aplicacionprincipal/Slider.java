@@ -54,26 +54,17 @@ public class Slider extends AppCompatActivity {
 
         AlertDialog.Builder messageAlertDialog = new AlertDialog.Builder(this);
         messageAlertDialog.setMessage("¿Deseas cerrar sesion?")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(Slider.this, "Has cerrado sesión.", Toast.LENGTH_SHORT).show();
-                        cerrarSesion();
-                        startActivity(new Intent(Slider.this, MainActivity.class));
-                        finish();
-                    }
-                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                .setPositiveButton("Aceptar", (dialog, which) -> {
+                    Toast.makeText(Slider.this, "Has cerrado sesión.", Toast.LENGTH_SHORT).show();
+                    cerrarSesion();
+                    startActivity(new Intent(Slider.this, MainActivity.class));
+                    finish();
+                }).setNegativeButton("Cancelar", (dialog, which) -> {
 
-            }
         });
-        flechaAtrasImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(Slider.this, "Texto", Toast.LENGTH_SHORT).show();
-                messageAlertDialog.show();
-            }
+        flechaAtrasImageView.setOnClickListener(v -> {
+            //Toast.makeText(Slider.this, "Texto", Toast.LENGTH_SHORT).show();
+            messageAlertDialog.show();
         });
     }
 
@@ -84,7 +75,8 @@ public class Slider extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     String nombreString = "" + ds.child("Nombre").getValue();
-                    textoBienvenidaSliderTextView.setText(new StringBuilder().append("Bienvenido ").append(nombreString).append(" !").toString());
+                    nombreString = nombreString.substring(0, 1).toUpperCase() + nombreString.substring(1);
+                    textoBienvenidaSliderTextView.setText("Bienvenido " + nombreString + " !");
                 }
             }
 

@@ -33,7 +33,7 @@ public class SliderAdapter extends PagerAdapter {
     };
     public String[] titulos_slider = {
             "ZOMBIE KILLER",
-            "PROXIMAMENTE..."
+            "PRÓXIMAMENTE..."
     };
     public String[] descripciones_slider = {
             "Primer juego diseñado en la aplicación de GameCrush, ¡machaca a esos zombies antes de que se acabe el tiempo!",
@@ -66,18 +66,15 @@ public class SliderAdapter extends PagerAdapter {
         tituloSlide.setText(titulos_slider[position]);
         descripcionSlide.setText(descripciones_slider[position]);
         container.addView(view);
-        imagenSlide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (position == 0) {
-                    Intent intent = new Intent(context, MenuZombieKiller.class);
-                    context.startActivity(intent);
-                    slider.finish();
+        imagenSlide.setOnClickListener(v -> {
+            if (position == 0) {
+                Intent intent = new Intent(context, MenuZombieKiller.class);
+                context.startActivity(intent);
+                slider.finish();
 
-                }
-                if (position == 1) {
-                    Toast.makeText(context, "Próximamente mas juegos... :)", Toast.LENGTH_SHORT).show();
-                }
+            }
+            if (position == 1) {
+                Toast.makeText(context, "Próximamente mas juegos... :)", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

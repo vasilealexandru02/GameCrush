@@ -58,7 +58,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/black">
+            android:textColorHint="@color/black"
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/passwordUsuario"

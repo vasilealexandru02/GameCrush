@@ -3,6 +3,7 @@ package com.alex.gamecrush.zombiekiller;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -59,6 +60,8 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
     DatabaseReference reference;
     DatabaseReference zombieKillerScoreReference;
 
+    private MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,7 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
         puntuacionMax = Integer.parseInt(intent.getString("puntuacionMax"));
         // ASIGNACION VALORES RECOGIDOS DEL EXTRA
 
-        contadorZombiesTextView.setText("0 zombies eliminados");
+        contadorZombiesTextView.setText(R.string.textoZombiesEliminados);
         obtenerDatosPantalla();
         calcularTiempoRestante();
 
@@ -110,41 +113,59 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
 
 
         // EVENTO MATAR ZOMBIES
-        zombieImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!partidaPerdida) {
-                    // Aumenta el contador de zombies eliminados
-                    contador++;
-                    // Se cambia el texto del contador con el valor del contador
-                    contadorZombiesTextView.setText(String.valueOf(contador) + " zombies eliminados");
-                    // Al hacer click sobre la imagen, se cambia por la otra imagen
-                    //zombieImageView.setImageResource(R.drawable.zombieaplastado);
-                    zombieImageView.setImageResource(imagenesZombies.get(generarNumeroAleatorio(imagenesZombies.size(), 0)));
+        zombieImageView.setOnClickListener(v -> {
+            if (!partidaPerdida) {
+                // Aumenta el contador de zombies eliminados
+                contador++;
+                // Se cambia el texto del contador con el valor del contador
+                contadorZombiesTextView.setText(contador + " zombies eliminados");
+                // Al hacer click sobre la imagen, se cambia por la otra imagen
+                //zombieImageView.setImageResource(R.drawable.zombieaplastado);
+                zombieImageView.setImageResource(imagenesZombies.get(generarNumeroAleatorio(imagenesZombies.size(), 0)));
 
-                    crearZombie();
+                crearZombie();
 
-                    //Vuelve a aparecer la imagen del zombie original
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                //Vuelve a aparecer la imagen del zombie original
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
 
-
-                        }
-                    }, generarNumeroAleatorio());
-                }
+                    }
+                }, generarNumeroAleatorio());
             }
         });
 
         numeroScore = 0;
+        mediaPlayer = MediaPlayer.create(EscenarioJuegoZombieKiller.this, R.raw.zombie_killer_track);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
+        mediaPlayer.release();
     }
 
     /**
      * Devuelve un numero aleatorio
      *
-     * @return
+     * @return numero aleatorio
      */
     private int generarNumeroAleatorio() {
         Random random = new Random();
@@ -174,7 +195,7 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
     private void crearZombie() {
         int valorMinimo = 0;
         int maximoX = anchoPantalla - zombieImageView.getWidth();
-        int maximoY = altoPantalla - zombieImageView.getHeight();
+        int maximoY = altoPantalla - zombieImageView.getHeight() * 2;
 
         int randomX = generarNumeroAleatorio(maximoX, valorMinimo);
         int randomY = generarNumeroAleatorio(maximoY, valorMinimo);
@@ -188,7 +209,7 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
      * Calcula el tiempo restante que le falta al jugador y lo muestra en pantalla
      */
     private void calcularTiempoRestante() {
-        new CountDownTimer(generarNumeroAleatorio(15000, 5000), 1000) {
+        new CountDownTimer(generarNumeroAleatorio(16000, 10000), 1000) {
             // TIEMPO ESTA CORRIENDO, SE EJECUTA UNA VEZ POR SEGUNDO
             public void onTick(long millisUntilFinished) {
                 long tiempoRestante = millisUntilFinished / 1000;
@@ -223,31 +244,22 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
 
         // CLICK LISTENER BOTONES
 
-        volverAJugarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                contador = 0;
-                partidaPerdidaDialog.dismiss();
-                textoJuegoZombiesTextView.setText("");
-                partidaPerdida = false;
-                calcularTiempoRestante();
-                crearZombie();
-            }
+        volverAJugarButton.setOnClickListener(v -> {
+            contador = 0;
+            partidaPerdidaDialog.dismiss();
+            textoJuegoZombiesTextView.setText("");
+            partidaPerdida = false;
+            calcularTiempoRestante();
+            crearZombie();
         });
 
-        volverMenuPrincipalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(EscenarioJuegoZombieKiller.this, MenuZombieKiller.class));
-                partidaPerdidaDialog.dismiss();
-                finish();
-            }
+        volverMenuPrincipalButton.setOnClickListener(v -> {
+            startActivity(new Intent(EscenarioJuegoZombieKiller.this, MenuZombieKiller.class));
+            partidaPerdidaDialog.dismiss();
+            finish();
         });
 
-
-        String zombies = String.valueOf(contador);
-
-        textoJuegoZombiesTextView.setText("Has matado a " + zombies + " zombies.");
+        textoJuegoZombiesTextView.setText("Has matado a " + String.valueOf(contador) + " zombies.");
         partidaPerdidaDialog.show();
 
 
@@ -257,13 +269,10 @@ public class EscenarioJuegoZombieKiller extends AppCompatActivity {
         if (cantidadZombies > puntuacionMax) {
             HashMap<String, Object> datosJugador = new HashMap<>();
             datosJugador.put(key, cantidadZombies);
-            reference.child(user.getUid()).updateChildren(datosJugador).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    puntuacionCambiada = true;
-                    Toast.makeText(EscenarioJuegoZombieKiller.this, "La puntuación fue actualizada!", Toast.LENGTH_SHORT).show();
+            reference.child(user.getUid()).updateChildren(datosJugador).addOnCompleteListener(task -> {
+                puntuacionCambiada = true;
+                Toast.makeText(EscenarioJuegoZombieKiller.this, "La puntuación fue actualizada!", Toast.LENGTH_SHORT).show();
 
-                }
             });
         } else {
             Toast.makeText(EscenarioJuegoZombieKiller.this, "Tu puntuación ha sido demasiado baja!", Toast.LENGTH_SHORT).show();

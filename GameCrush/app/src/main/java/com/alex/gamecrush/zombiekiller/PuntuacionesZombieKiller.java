@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alex.gamecrush.R;
 import com.alex.gamecrush.aplicacionprincipal.Constants;
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +39,7 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
     private DatabaseReference baseDeDatos;
     private FirebaseDatabase firebaseDatabase;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +51,12 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
 
 
         // FLECHA VOLVER ATRAS
-        flechaVolverAtrasImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PuntuacionesZombieKiller.this, MenuZombieKiller.class));
-                finish();
-            }
+        flechaVolverAtrasImageView.setOnClickListener(v -> {
+            startActivity(new Intent(PuntuacionesZombieKiller.this, MenuZombieKiller.class));
+            finish();
         });
         init();
+
     }
 
     public void init() {
@@ -75,11 +77,14 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("SNAPSHOT", snapshot.getChildren().toString());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Log.i("SNAPSHOT", dataSnapshot.child("Jugador").getValue().toString());
                     String nombre = "" + dataSnapshot.child("Jugador").getValue();
                     String score = "" + dataSnapshot.child("Zombies").getValue();
                     ListElement listElement = new ListElement(nombre, score);
                     elementos.add(listElement);
+
                     // ordena los elementos de la query de forma descendente
                     Collections.sort(elementos, (listElement1, listElement2) -> {
                         if (Integer.parseInt(listElement1.getScore()) < Integer.parseInt(listElement2.getScore()))
@@ -92,10 +97,16 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
 
                 }
                 // añadir texto al score del jugador
+
                 for (ListElement listElement : elementos) {
                     listElement.setScore(listElement.getScore() + " zombies eliminados");
                 }
+
                 listAdapter.notifyDataSetChanged();
+                if (elementos.isEmpty()) {
+                    findViewById(R.id.noHayRegistrosPuntuaciones).setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override
@@ -103,5 +114,14 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
 
             }
         });
+
+
+        //Log.i("CONTENIDO ARRAY", elementos.toString());
+    }
+
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_left, R.anim.slide_outright);
+        elementos.clear();
     }
 }

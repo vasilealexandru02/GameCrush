@@ -74,35 +74,26 @@ public class Registro extends AppCompatActivity {
      * @param password
      */
     private void registrarUsuario(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    // Una vez registrado el usuario, se cambia de actividad a la del menu
-                    //startActivity(new Intent(Registro.this, MenuJuego.class));
-                    FirebaseUser user = auth.getCurrentUser();
-                    Toast.makeText(Registro.this, "Usuario registrado correctamente.", Toast.LENGTH_SHORT).show();
-                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // Una vez registrado el usuario, se cambia de actividad a la del menu
+                //startActivity(new Intent(Registro.this, MenuJuego.class));
+                FirebaseUser user = auth.getCurrentUser();
+                Toast.makeText(Registro.this, "Usuario registrado correctamente.", Toast.LENGTH_SHORT).show();
+                user.sendEmailVerification().addOnCompleteListener(task1 -> {
 
-                            insertarDatosJugador();
-                            startActivity(new Intent(Registro.this, Slider.class));
-                            finish();
-                        }
-                    });
+                    insertarDatosJugador();
+                    startActivity(new Intent(Registro.this, Slider.class));
+                    finish();
+                });
 
 
-                } else {
-                    Toast.makeText(Registro.this, "No se ha podido registrar el usuario", Toast.LENGTH_SHORT).show();
-                }
+            } else {
+                Toast.makeText(Registro.this, "No se ha podido registrar el usuario", Toast.LENGTH_SHORT).show();
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                //
-                Toast.makeText(Registro.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+        }).addOnFailureListener(e -> {
+            //
+            Toast.makeText(Registro.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
 
 

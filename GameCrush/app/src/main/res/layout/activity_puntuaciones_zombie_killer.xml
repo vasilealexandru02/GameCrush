@@ -12,12 +12,12 @@
         android:id="@+id/flechaMenuPuntuaciones"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="28dp"
         android:clickable="true"
-        android:src="@drawable/flecha_izquierda"
 
-        app:layout_constraintBottom_toTopOf="@+id/datosJugadorRecyclerView"
+        android:src="@drawable/flecha_izquierda"
         app:layout_constraintEnd_toStartOf="@+id/nombreUsuarioPuntuaciones"
-        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,11 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="36dp"
         android:text="@string/cantidadZombies"
         android:textColor="@color/white"
-        android:textSize="20dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/datosJugadorRecyclerView"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +40,9 @@
         android:id="@+id/datosJugadorRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginEnd="50dp"
         android:foregroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,4 +50,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/noHayRegistrosPuntuaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:text="No hay registros de jugadores."
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/datosJugadorRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/datosJugadorRecyclerView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,12 +36,7 @@ public class PasswordOlvidada extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPassword();
-            }
-        });
+        resetPasswordButton.setOnClickListener(v -> resetPassword());
     }
 
     private void resetPassword() {
@@ -62,15 +57,12 @@ public class PasswordOlvidada extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
 
-        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(PasswordOlvidada.this, "Mira tu correo electrónico para reestablecer tu contraseña", Toast.LENGTH_SHORT).show();
-                } else {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(PasswordOlvidada.this, "Hubo un error recuperando la contraseña :(", Toast.LENGTH_SHORT).show();
-                }
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(PasswordOlvidada.this, "Mira tu correo electrónico para reestablecer tu contraseña", Toast.LENGTH_SHORT).show();
+            } else {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(PasswordOlvidada.this, "Hubo un error recuperando la contraseña :(", Toast.LENGTH_SHORT).show();
             }
         });
     }

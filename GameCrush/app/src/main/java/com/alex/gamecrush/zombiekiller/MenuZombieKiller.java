@@ -64,48 +64,39 @@ public class MenuZombieKiller extends AppCompatActivity {
         flechaMenuJuegoZombie = findViewById(R.id.flechaMenuJuegoZombie);
 
         // BOTON DE JUGAR
-        jugarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuZombieKiller.this, EscenarioJuegoZombieKiller.class);
-                //String nombreString = textViewNombreUsuarioMenu.getText().toString();
-                String cantidadZombies = cantidadZombiesTextView.getText().toString();
+        jugarButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuZombieKiller.this, EscenarioJuegoZombieKiller.class);
+            //String nombreString = textViewNombreUsuarioMenu.getText().toString();
+            //String cantidadZombies = cantidadZombiesTextView.getText().toString();
 
-                intent.putExtra("uid", uidString);
-                intent.putExtra("nombre", nombreJugador);
-                intent.putExtra("cantidadzombies", cantidadZombiesString);
-                intent.putExtra("puntuacionMax", puntuacionMax);
+            intent.putExtra("uid", uidString);
+            intent.putExtra("nombre", nombreJugador);
+            intent.putExtra("cantidadzombies", cantidadZombiesString);
+            intent.putExtra("puntuacionMax", puntuacionMax);
 
-                startActivity(intent);
-                finish();
-            }
+            startActivity(intent);
+            finish();
         });
         // BOTON DE VER PUNTUACIONES
-        puntuacionesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuZombieKiller.this, PuntuacionesZombieKiller.class);
-                intent.putExtra("nombre", nombreJugador);
-                startActivity(intent);
-                finish();
-            }
+        puntuacionesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuZombieKiller.this, PuntuacionesZombieKiller.class);
+            intent.putExtra("nombre", nombreJugador);
+            startActivity(intent);
+            finish();
         });
 
         // BOTON DE ACERCA DE
-        acercaDeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
+        acercaDeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuZombieKiller.this, AcercaDe.class);
+            intent.putExtra("nombre", nombreJugador);
+            startActivity(intent);
+            finish();
         });
 
         // FLECHA VOLVER ATRAS
-        flechaMenuJuegoZombie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuZombieKiller.this, Slider.class));
-                finish();
-            }
+        flechaMenuJuegoZombie.setOnClickListener(v -> {
+            startActivity(new Intent(MenuZombieKiller.this, Slider.class));
+            finish();
         });
     }
 
@@ -137,11 +128,12 @@ public class MenuZombieKiller extends AppCompatActivity {
                     cantidadZombiesString = "" + ds.child("Zombies").getValue();
                     puntuacionMax = "" + ds.child("Zombies").getValue();
                     uidString = "" + ds.child("Uid").getValue();
-                    String nombreString = "" + ds.child("Nombre").getValue();
+                    //String nombreString = "" + ds.child("Nombre").getValue();
                     nombreJugador = "" + ds.child("Nombre").getValue();
+                    nombreJugador = nombreJugador.substring(0, 1).toUpperCase() + nombreJugador.substring(1);
 
                     cantidadZombiesTextView.setText("Record: " + cantidadZombiesString + " zombies eliminados");
-                    nombreUsuarioMenuTextView.setText("Jugador: " + nombreString);
+                    nombreUsuarioMenuTextView.setText("Jugador: " + nombreJugador);
 
                 }
             }

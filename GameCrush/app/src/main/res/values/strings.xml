@@ -47,11 +47,12 @@
     <string name="volverAJugar">Reintentar</string>
     <string name="verPuntuaciones">Puntuaciones</string>
     <string name="volverMenuPrincipal">Menu principal</string>
-    <string name ="acercaDeZombieKiller">Primer juego desarrollado por el equipo de GameCrush. El objetivo del juego es matar a la máxima
+    <string name="acercaDeZombieKiller">Primer juego desarrollado por el equipo de GameCrush. El objetivo del juego es matar a la máxima
     cantidad de zombies... ¿o no? Si quieres sabes más busca a través de la aplicación :)</string>
 
 
     <!--Slider-->
     <string name="descripcionJuegoZombie">Primer juego diseñado en la aplicación de GameCrush, machaca a esos zombies antes de que se acabe el tiempo!</string>
+    <string name="textoZombiesEliminados">0 zombies eliminados</string>
 
 </resources>
