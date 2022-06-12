@@ -77,14 +77,14 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("SNAPSHOT", snapshot.getChildren().toString());
+                //Log.i("SNAPSHOT", snapshot.getChildren().toString());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Log.i("SNAPSHOT", dataSnapshot.child("Jugador").getValue().toString());
+                    //Log.i("SNAPSHOT", dataSnapshot.child("Jugador").getValue().toString());
                     String nombre = "" + dataSnapshot.child("Jugador").getValue();
                     String score = "" + dataSnapshot.child("Zombies").getValue();
                     ListElement listElement = new ListElement(nombre, score);
                     elementos.add(listElement);
-
+                    Log.i("ELEMENTOS", elementos.toString());
                     // ordena los elementos de la query de forma descendente
                     Collections.sort(elementos, (listElement1, listElement2) -> {
                         if (Integer.parseInt(listElement1.getScore()) < Integer.parseInt(listElement2.getScore()))
@@ -98,9 +98,9 @@ public class PuntuacionesZombieKiller extends AppCompatActivity {
                 }
                 // añadir texto al score del jugador
 
-                for (ListElement listElement : elementos) {
+               /* for (ListElement listElement : elementos) {
                     listElement.setScore(listElement.getScore() + " zombies eliminados");
-                }
+                }*/
 
                 listAdapter.notifyDataSetChanged();
                 if (elementos.isEmpty()) {

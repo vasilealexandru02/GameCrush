@@ -42,7 +42,7 @@
     <string name="tiempoRestante">0</string>
 
     <!--Partida perdida Zombie Killer-->
-    <string name="textoPartidaPerdidaZombies">¡Has perdido!</string>
+    <string name="textoPartidaPerdidaZombies">¡Partida finalizada!</string>
     <string name="textoJuegoZombies">Has asesinado </string>
     <string name="volverAJugar">Reintentar</string>
     <string name="verPuntuaciones">Puntuaciones</string>

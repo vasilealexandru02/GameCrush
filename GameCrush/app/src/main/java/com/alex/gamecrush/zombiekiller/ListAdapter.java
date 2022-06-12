@@ -65,7 +65,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         void bindData(final ListElement item) {
             iconImage.setColorFilter(Color.parseColor(item.getColor()), PorterDuff.Mode.SRC_IN);
             nombre.setText(item.getName());
-            score.setText(item.getScore());
+            score.setText(item.getScore() + " zombies eliminados      ");
         }
     }
 
